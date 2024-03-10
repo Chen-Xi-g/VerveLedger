@@ -19,6 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "VerveKit"
+rootProject.name = "Verve-MVVM-Ledger"
 include(":app")
-include(":verve_kit")

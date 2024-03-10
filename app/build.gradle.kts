@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.griffin.vervekit"
+    namespace = "com.griffin.ledger"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.griffin.vervekit"
+        applicationId = "com.griffin.ledger"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -42,7 +42,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(project(":verve_kit"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

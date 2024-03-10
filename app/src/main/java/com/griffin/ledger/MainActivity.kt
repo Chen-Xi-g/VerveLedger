@@ -1,4 +1,4 @@
-package com.griffin.vervekit
+package com.griffin.ledger
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
