@@ -41,6 +41,6 @@ abstract class AbstractActivity : AppCompatActivity(){
      * @param code 错误码
      * @param url 错误地址
      */
-    open fun onError(message: String,isToast: Boolean, code: Int, url: String) {}
+    open fun onError(message: String?,isToast: Boolean, code: Int?, url: String?) {}
 
 }

@@ -5,12 +5,6 @@ package com.griffin.core.utils.mmkv
  */
 object BaseMV {
 
-    object System: Delegates(){
-        override fun zoneId(): String {
-            return "system"
-        }
-    }
-
     object User: Delegates(){
         override fun zoneId(): String {
             return "user"

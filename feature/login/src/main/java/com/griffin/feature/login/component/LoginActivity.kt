@@ -1,14 +1,10 @@
 package com.griffin.feature.login.component
 
 import android.os.Bundle
-import android.view.View
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.griffin.core.base.activity.BaseActivity
 import com.griffin.core.utils.mmkv.gone
-import com.griffin.feature.login.R
 import com.griffin.feature.login.databinding.ActivityLoginBinding
 
 class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {

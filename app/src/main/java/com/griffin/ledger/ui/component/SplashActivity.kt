@@ -1,7 +1,6 @@
 package com.griffin.ledger.ui.component
 
 import android.animation.ObjectAnimator
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateInterpolator
@@ -10,10 +9,8 @@ import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
-import com.griffin.core.utils.mmkv.intent
 import com.griffin.core.utils.mmkv.start
 import com.griffin.feature.login.component.LoginActivity
-import com.griffin.ledger.ui.component.guide.GuideActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

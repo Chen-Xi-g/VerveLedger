@@ -1,11 +1,9 @@
 package com.griffin.ledger.ui.component.guide
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
-import com.griffin.core.utils.mmkv.intent
 import com.griffin.core.utils.mmkv.start
 import com.griffin.ledger.R
 import com.griffin.ledger.databinding.ActivityGuideBinding

@@ -2,7 +2,6 @@ package com.griffin.core.base.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.griffin.core.base.R
 

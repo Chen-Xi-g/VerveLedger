@@ -108,7 +108,10 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AbstractActi
                 // 监听UI状态
                 when (it) {
                     is ViewState.Empty -> showEmpty(it.msg)
-                    is ViewState.Error -> showError(it.msg)
+                    is ViewState.Error -> {
+                        onError(it.msg, it.isToast, it.code, it.url)
+                        showError(it.msg)
+                    }
                     is ViewState.LoadingDialog -> showLoadingDialog(it.msg)
                     is ViewState.LoadingLayout -> showLoading(it.msg)
                     ViewState.Success -> showContent()
@@ -180,7 +183,7 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AbstractActi
      * @param msg 错误信息
      */
     fun showError(msg: String? = null) {
-        _rootBinding.baseErrorLayout.baseLoadingText.text = msg
+        _rootBinding.baseErrorLayout.baseLoadingText.text = msg ?: ""
         loadingDialog.dismiss()
         _rootBinding.baseLoadingLayout.root.hide()
         _rootBinding.baseEmptyLayout.root.hide()
@@ -217,10 +220,10 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AbstractActi
         visibility = View.INVISIBLE
     }
 
-    override fun onError(message: String, isToast: Boolean, code: Int, url: String) {
+    override fun onError(message: String?, isToast: Boolean, code: Int?, url: String?) {
         if (isToast){
             // 弹出toast
-            message.toast()
+            message?.toast()
         }else{
             // 显示错误布局
             showError(message)
