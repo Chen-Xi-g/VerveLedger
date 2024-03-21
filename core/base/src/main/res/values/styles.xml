@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="roundClick">
+        <item name="android:background">@drawable/base_shape_button_gradient_round</item>
+        <item name="android:textColor">@color/color_surface</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>

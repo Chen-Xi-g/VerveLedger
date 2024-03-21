@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">VerveKit</string>
+    <string name="VerveLedger">VerveLedger</string>
+    <string name="app_str_detail">明细</string>
+    <string name="app_str_statistics">统计</string>
+    <string name="app_str_assets">资产</string>
+    <string name="app_str_mine">我的</string>
+    <string name="app_str_add">新增账单</string>
+    <string name="app_skip">跳过</string>
+    <string name="app_enter_app">进入忞鹿记账</string>
+    <string name="app_format_index">%1$s/%2$s</string>
 </resources>

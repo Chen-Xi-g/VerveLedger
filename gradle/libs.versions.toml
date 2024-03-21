@@ -1,6 +1,7 @@
 [versions]
-agp = "8.4.0-alpha07"
+agp = "8.3.0-beta02"
 kotlin = "1.9.0"
+coroutines = "1.8.0"
 coreKtx = "1.10.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
@@ -10,21 +11,57 @@ lifecycle = "2.7.0"
 material = "1.10.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
+serialization = "1.6.0"
+hilt = "2.48"
+ksp = "1.9.0-1.0.13"
+router = "1.2.2-rc9"
+okhttp = "4.9.1"
+retrofit = "2.9.0"
+retrofit-serialization = "1.0.0"
+chucker = "4.0.0"
+mmkv = "1.3.0"
+lottie = "6.4.0"
+viewbinding-util = "2.1.0"
+autoSize = "v1.2.1"
+splashScreen = "1.0.1"
+domainUrlMain = "http://192.168.0.102"
 
 [libraries]
+# Kotlin
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
+kotlin-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+# Android
+android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
-androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+# Open source
+router-apt = { group = "cn.therouter", name = "apt", version.ref = "router" }
+router-router = { group = "cn.therouter", name = "router", version.ref = "router" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-serialization" }
+chucker-debug = { group = "com.github.chuckerteam.chucker", name = "library", version.ref = "chucker" }
+chucker-release = { group = "com.github.chuckerteam.chucker", name = "library-no-op", version.ref = "chucker" }
+mmkv = { group = "com.tencent", name = "mmkv", version.ref = "mmkv" }
+lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
+viewbinding-util = { group = "com.github.DylanCaiCoding.ViewBindingKTX", name = "viewbinding-base", version.ref = "viewbinding-util"}
+autoSize = { group = "com.github.JessYanCoding", name = "AndroidAutoSize", version.ref = "autoSize" }
+splash-screen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashScreen" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+android-kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+android-router-agp8 = { id = "cn.therouter.agp8", version.ref = "router" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialization" }
+dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 

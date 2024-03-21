@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/detail"
+        android:icon="@drawable/ic_bottom_home"
+        android:title="@string/app_str_detail" />
+
+    <item
+        android:id="@+id/statistics"
+        android:icon="@drawable/ic_bottom_statistics"
+        android:title="@string/app_str_statistics" />
+
+    <item
+        android:id="@+id/add"
+        android:title=""
+        android:enabled="false"/>
+
+    <item
+        android:id="@+id/assets"
+        android:icon="@drawable/ic_bottom_assets"
+        android:title="@string/app_str_assets" />
+
+    <item
+        android:id="@+id/mine"
+        android:icon="@drawable/ic_bottom_mine"
+        android:title="@string/app_str_mine" />
+
+</menu>

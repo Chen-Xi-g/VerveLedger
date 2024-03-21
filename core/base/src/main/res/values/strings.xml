@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="base_empty_text">- 暂无数据 -</string>
+    <string name="base_error_text">加载失败</string>
+    <string name="base_loading_text">加载中…</string>
+    <string name="base_retry">点击屏幕重试</string>
+</resources>

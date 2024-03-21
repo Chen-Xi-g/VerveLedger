@@ -1,9 +1,42 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.VerveKit" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.VerveLedger" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowBackground">@color/color_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@style/animationActivity</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- 去除Recyclerview Scrollview LisView ViewPager 边界效果-->
+        <item name="android:overScrollMode">never</item>
+        <!-- 主题颜色设置 -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryContainer">@color/color_primary_container</item>
+        <item name="colorSecondaryContainer">@color/color_secondary_container</item>
     </style>
 
-    <style name="Theme.VerveKit" parent="Base.Theme.VerveKit" />
+    <style name="Theme.VerveLedger" parent="Base.Theme.VerveLedger" />
+
+    <!-- 设置Material 3 FAB 的圆角-->
+    <style name="fab_3_rounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!--闪屏页动画-->
+    <style name="Theme.VerveLedger.Starting" parent="Theme.SplashScreen">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="windowSplashScreenBackground">@color/color_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/animated_logo</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/Theme.VerveLedger</item>
+    </style>
+    <!-- Activity 进出场动画 -->
+    <style name="animationActivity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
 </resources>
