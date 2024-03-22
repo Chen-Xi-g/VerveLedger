@@ -1,12 +1,16 @@
 <resources>
     <string name="login_str_hello">Hello!</string>
     <string name="login_str_welcome">欢迎登录火记</string>
+    <string name="login_str_welcome_register">欢迎注册火记</string>
     <string name="login_str_username_hint">请输入用户名</string>
+    <string name="login_str_email_hint">请输入邮箱</string>
     <string name="login_str_password_hint">请输入密码</string>
+    <string name="login_str_verify_password_hint">请确认密码</string>
     <string name="login_str_code_hint">请输入验证码</string>
     <string name="login_str_activate_account">激活账户</string>
     <string name="login_str_forget_password">忘记密码？</string>
-    <string name="login_str_register">注册账户</string>
+    <string name="login_str_register_account">注册账户</string>
     <string name="login_str_login">登 录</string>
+    <string name="login_str_register">注 册</string>
     <string name="login_str_agreement">登录即代表您已同意《用户协议》与《隐私政策》</string>
 </resources>

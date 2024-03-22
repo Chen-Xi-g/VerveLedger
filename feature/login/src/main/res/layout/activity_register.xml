@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="@string/login_str_welcome"
+                android:text="@string/login_str_welcome_register"
                 android:textColor="@color/color_primary"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@id/tv_hello"
@@ -112,6 +112,44 @@
                     app:layout_constraintTop_toBottomOf="@id/iv_username" />
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_email"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="22dp"
+                    android:src="@drawable/login_ic_email"
+                    android:tint="@color/color_text_hint"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/v_line_username" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/login_str_email_hint"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="24"
+                    android:maxLines="1"
+                    android:paddingVertical="10dp"
+                    android:textColor="@color/color_onSurface"
+                    android:textColorHint="@color/color_text_hint"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_email"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_email"
+                    app:layout_constraintTop_toTopOf="@id/iv_email" />
+
+                <View
+                    android:id="@+id/v_line_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="19dp"
+                    android:background="@color/color_line"
+                    app:layout_constraintTop_toBottomOf="@id/iv_email" />
+
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_password"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
@@ -119,7 +157,7 @@
                     android:src="@drawable/login_ic_password"
                     android:tint="@color/color_text_hint"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/v_line_username" />
+                    app:layout_constraintTop_toBottomOf="@id/v_line_email" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/et_password"
@@ -138,21 +176,9 @@
                     android:textColorHint="@color/color_text_hint"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@id/iv_password"
-                    app:layout_constraintEnd_toStartOf="@id/tv_forget_password"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_password"
                     app:layout_constraintTop_toTopOf="@id/iv_password" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_forget_password"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/login_str_forget_password"
-                    android:textColor="@color/color_primary"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/et_password"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/et_password" />
 
                 <View
                     android:id="@+id/v_line_password"
@@ -163,6 +189,45 @@
                     app:layout_constraintTop_toBottomOf="@id/iv_password" />
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_verify_password"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="22dp"
+                    android:src="@drawable/login_ic_password"
+                    android:tint="@color/color_text_hint"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/v_line_password" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_verify_password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/login_str_verify_password_hint"
+                    android:inputType="textPassword"
+                    android:maxLength="24"
+                    android:maxLines="1"
+                    android:paddingVertical="10dp"
+                    android:textColor="@color/color_onSurface"
+                    android:textColorHint="@color/color_text_hint"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_verify_password"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_verify_password"
+                    app:layout_constraintTop_toTopOf="@id/iv_verify_password" />
+
+                <View
+                    android:id="@+id/v_line_verify_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="19dp"
+                    android:background="@color/color_line"
+                    app:layout_constraintTop_toBottomOf="@id/iv_verify_password" />
+
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_code"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
@@ -170,7 +235,7 @@
                     android:src="@drawable/login_ic_code"
                     android:tint="@color/color_text_hint"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/v_line_password" />
+                    app:layout_constraintTop_toBottomOf="@id/v_line_verify_password" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/et_code"
@@ -205,52 +270,18 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_activate_account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingVertical="10dp"
-                android:text="@string/login_str_activate_account"
-                android:textColor="@color/color_primary"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@id/cl_input"
-                app:layout_constraintTop_toBottomOf="@id/cl_input" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingVertical="10dp"
-                android:text="@string/login_str_register_account"
-                android:textColor="@color/color_primary"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@id/cl_input"
-                app:layout_constraintTop_toBottomOf="@+id/cl_input" />
-
-            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_login"
                 style="@style/roundClick"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="63dp"
-                android:text="@string/login_str_login"
+                android:layout_marginBottom="60dp"
+                android:text="@string/login_str_register"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_activate_account" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_agreement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="60dp"
-                android:textColor="@color/color_onSurface"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/tv_login"
-                app:layout_constraintStart_toStartOf="@id/tv_login"
-                app:layout_constraintTop_toBottomOf="@id/tv_login"
-                tools:text="登录即代表您已同意《用户协议》与《隐私政策》" />
+                app:layout_constraintTop_toBottomOf="@id/cl_input" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

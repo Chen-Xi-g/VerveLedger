@@ -1,5 +1,5 @@
 <resources>
-    <string name="VerveLedger">VerveLedger</string>
+    <string name="VerveLedger">火记</string>
     <string name="app_str_detail">明细</string>
     <string name="app_str_statistics">统计</string>
     <string name="app_str_assets">资产</string>
