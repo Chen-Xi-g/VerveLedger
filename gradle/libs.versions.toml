@@ -10,6 +10,7 @@ appcompat = "1.6.1"
 lifecycle = "2.7.0"
 material = "1.10.0"
 activity = "1.8.0"
+fragment = "1.6.2"
 constraintlayout = "2.1.4"
 serialization = "1.6.0"
 hilt = "2.48"
@@ -24,7 +25,7 @@ lottie = "6.4.0"
 viewbinding-util = "2.1.0"
 autoSize = "v1.2.1"
 splashScreen = "1.0.1"
-domainUrlMain = "http://192.168.0.102"
+domainUrlMain = "http://griffin.ledger.api.minlukj.com"
 
 [libraries]
 # Kotlin
@@ -35,7 +36,8 @@ kotlin-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutine
 android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-activity = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity" }
+androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }

@@ -19,9 +19,9 @@ import kotlinx.coroutines.launch
 import java.lang.reflect.ParameterizedType
 
 /**
- * 用于没有实现Hilt的ViewModel
+ * 用于实现Hilt的ViewModel
  */
-abstract class BaseFragment<VM : BaseViewModel, VB : ViewBinding> : AbstractFragment() {
+abstract class HiltBaseFragment<VB : ViewBinding> : AbstractFragment() {
 
     /**
      * 根布局
@@ -38,8 +38,7 @@ abstract class BaseFragment<VM : BaseViewModel, VB : ViewBinding> : AbstractFrag
     /**
      * 获取泛型中的ViewModel实例
      */
-    private lateinit var _viewModel: VM
-    val viewModel get() = _viewModel
+    abstract val viewModel: BaseViewModel
 
     /**
      * 加载中弹窗
@@ -63,7 +62,6 @@ abstract class BaseFragment<VM : BaseViewModel, VB : ViewBinding> : AbstractFrag
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _viewModel = createViewModel()
         registerObserver()
         initClick()
         _rootBinding.baseLoadingLayout.root.showAnim()
@@ -104,7 +102,7 @@ abstract class BaseFragment<VM : BaseViewModel, VB : ViewBinding> : AbstractFrag
      */
     override fun registerObserver() {
         lifecycleScope.launch {
-            _viewModel.viewState.collectLatest {
+            viewModel.viewState.collectLatest {
                 // 监听UI状态
                 when (it) {
                     is ViewState.Empty -> showEmpty(it.msg)
@@ -186,17 +184,6 @@ abstract class BaseFragment<VM : BaseViewModel, VB : ViewBinding> : AbstractFrag
         _rootBinding.baseContentLayout.hide()
     }
 
-    override fun onError(message: String?, isToast: Boolean, code: Int?) {
-        if (isToast){
-            showContent()
-            // 弹出toast
-            message?.toast()
-        }else{
-            // 显示错误布局
-            showError(message)
-        }
-    }
-
     /**
      * 设置标题名称
      */
@@ -226,15 +213,14 @@ abstract class BaseFragment<VM : BaseViewModel, VB : ViewBinding> : AbstractFrag
         visibility = View.INVISIBLE
     }
 
-    @Suppress("UNCHECKED_CAST")
-    private fun <VM> getVmClazz(obj: Any): VM {
-        return (obj.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as VM
-    }
-
-    /**
-     * 创建viewModel
-     */
-    private fun createViewModel(): VM {
-        return ViewModelProvider(this)[getVmClazz(this)]
+    override fun onError(message: String?, isToast: Boolean, code: Int?) {
+        if (isToast){
+            showContent()
+            // 弹出toast
+            message?.toast()
+        }else{
+            // 显示错误布局
+            showError(message)
+        }
     }
 }

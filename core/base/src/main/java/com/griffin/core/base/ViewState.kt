@@ -3,8 +3,7 @@ package com.griffin.core.base
 sealed class ViewState(
     val isToast: Boolean = false,
     val msg: String? = null,
-    val code: Int? = null,
-    val url: String? = null
+    val code: Int? = null
 ) {
     /**
      * 加载中弹窗
@@ -40,9 +39,8 @@ sealed class ViewState(
     data class Error(
         private val msgInfo: String?,
         private val showToast: Boolean = false,
-        private val codeInfo: Int = 0,
-        private val urlInfo: String? = null
-    ) : ViewState(msg = msgInfo, code = codeInfo, url = urlInfo, isToast = showToast)
+        private val codeInfo: Int = 0
+    ) : ViewState(msg = msgInfo, code = codeInfo, isToast = showToast)
 
     /**
      * 加载成功

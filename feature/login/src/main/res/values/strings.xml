@@ -8,4 +8,5 @@
     <string name="login_str_forget_password">忘记密码？</string>
     <string name="login_str_register">注册账户</string>
     <string name="login_str_login">登 录</string>
+    <string name="login_str_agreement">登录即代表您已同意《用户协议》与《隐私政策》</string>
 </resources>

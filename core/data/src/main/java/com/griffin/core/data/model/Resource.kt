@@ -1,4 +1,4 @@
-package com.griffin.core.network.http
+package com.griffin.core.data.model
 
 import com.griffin.core.data.dto.BaseDto
 
@@ -32,11 +32,15 @@ sealed class Resource<T>(
 
 /**
  * 数据传输对象转资源
+ *
+ * @param block 数据转换
  */
-fun <T> BaseDto<T>.toResource(): Resource<T> {
+fun <T,V> BaseDto<T>.toResource(
+    block: ((T?) -> V)? = null
+): Resource<V> {
     return if (isSuccess()) {
-        Resource.Success(`data`, code, msg ?: "请求成功")
+        Resource.Success(block?.invoke(`data`) ?: `data` as V, code, msg ?: "请求成功")
     } else {
-        Resource.Error(msg ?: "请求失败", code, `data`)
+        Resource.Error(msg ?: "请求失败", code)
     }
 }

@@ -27,17 +27,15 @@ import com.griffin.core.utils.mmkv.isVisible
 import com.griffin.core.utils.mmkv.runMain
 import com.griffin.core.utils.mmkv.toast
 import com.therouter.TheRouter
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import me.jessyan.autosize.AutoSizeCompat
 import java.lang.reflect.ParameterizedType
 
-
 /**
- * 用于没有实现Hilt的ViewModel
+ * 用于实现Hilt的ViewModel
  */
-abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AbstractActivity() {
+abstract class HiltBaseActivity<VB : ViewBinding> : AbstractActivity() {
 
     /**
      * 根布局
@@ -54,8 +52,7 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AbstractActi
     /**
      * 获取泛型中的ViewModel实例
      */
-    private lateinit var _viewModel: VM
-    val viewModel get() = _viewModel
+    abstract val viewModel: BaseViewModel
 
     /**
      * 加载中弹窗
@@ -76,7 +73,6 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AbstractActi
         // 设置默认布局
         _rootBinding = BaseRootLayoutBinding.inflate(layoutInflater)
         paddingWindow()
-        _viewModel = createViewModel()
         initContent()
         setContentView(_rootBinding.root)
         registerObserver()
@@ -93,6 +89,9 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AbstractActi
     }
 
     private fun initClick(){
+        _rootBinding.baseTitleLayout.baseBackButton.setOnClickListener {
+            finish()
+        }
         _rootBinding.baseErrorLayout.root.setOnClickListener {
             if (_rootBinding.baseErrorLayout.root.isVisible()){
                 onRetry()
@@ -105,7 +104,7 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AbstractActi
      */
     override fun registerObserver() {
         lifecycleScope.launch {
-            _viewModel.viewState.collectLatest {
+            viewModel.viewState.collectLatest {
                 // 监听UI状态
                 when (it) {
                     is ViewState.Empty -> showEmpty(it.msg)
@@ -294,18 +293,6 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AbstractActi
                     && ev.y > top && ev.y < bottom)
         }
         return false
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    private fun <VM> getVmClazz(obj: Any): VM {
-        return (obj.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as VM
-    }
-
-    /**
-     * 创建viewModel
-     */
-    private fun createViewModel(): VM {
-        return ViewModelProvider(this)[getVmClazz(this)]
     }
 
     /**

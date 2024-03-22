@@ -2,13 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <application>
+    <application
+        tools:ignore="DiscouragedApi">
         <meta-data
             android:name="design_width_in_dp"
             android:value="375" />
         <meta-data
             android:name="design_height_in_dp"
             android:value="812" />
+
+        <activity android:name=".web.WebActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

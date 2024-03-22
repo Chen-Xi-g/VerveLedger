@@ -24,6 +24,7 @@ class FeatureConventionPlugin : Plugin<Project>{
                 add("implementation", libs.findLibrary("androidx-appcompat").get())
                 add("implementation", libs.findLibrary("material").get())
                 add("implementation", libs.findLibrary("androidx-activity").get())
+                add("implementation", libs.findLibrary("androidx-fragment").get())
                 add("implementation", libs.findLibrary("androidx-constraintlayout").get())
                 add("implementation", libs.findLibrary("kotlin-coroutines").get())
                 add("implementation", libs.findLibrary("lifecycle-viewmodel").get())

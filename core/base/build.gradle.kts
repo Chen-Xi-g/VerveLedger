@@ -1,5 +1,6 @@
 plugins {
     id("griffin.library")
+    id("griffin.hilt")
 }
 
 android {
@@ -10,8 +11,10 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity)
+    implementation(libs.androidx.fragment)
     implementation(project(":core:data"))
     implementation(project(":core:utils"))
+    implementation(project(":core:network"))
     implementation(libs.kotlin.coroutines)
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lottie)

@@ -4,4 +4,4 @@
 
 ## 介绍
 
-使用Kotlin + MVVM + Retrofit + 协程 + Hilt 开发的记账软件
+现代化MVVM架构，使用Kotlin + MVVM + Retrofit + 协程 + Hilt 开发的记账软件。

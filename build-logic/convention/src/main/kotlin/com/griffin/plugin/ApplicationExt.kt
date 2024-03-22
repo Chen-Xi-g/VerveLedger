@@ -98,6 +98,7 @@ internal fun Project.configureApplication(
             add("implementation", libs.findLibrary("androidx.appcompat").get())
             add("implementation", libs.findLibrary("material").get())
             add("implementation", libs.findLibrary("androidx.activity").get())
+            add("implementation", libs.findLibrary("androidx.fragment").get())
             add("implementation", libs.findLibrary("androidx.constraintlayout").get())
             add("ksp", libs.findLibrary("router.apt").get())
             add("implementation", libs.findLibrary("router.router").get())
