@@ -29,14 +29,26 @@ sealed class ViewState(
     data class Empty(private val msgInfo: String?) : ViewState(msg = msgInfo)
 
     /**
-     * 加载失败回调
+     * 加载失败布局回调
      *
      * @param msgInfo 错误信息
      * @param showToast 是否弹出toast
      * @param codeInfo 错误码
-     * @param urlInfo 错误地址
      */
-    data class Error(
+    data class ErrorLayout(
+        private val msgInfo: String?,
+        private val showToast: Boolean = false,
+        private val codeInfo: Int = 0
+    ) : ViewState(msg = msgInfo, code = codeInfo, isToast = showToast)
+
+    /**
+     * 加载失败弹窗回调
+     *
+     * @param msgInfo 错误信息
+     * @param showToast 是否弹出toast
+     * @param codeInfo 错误码
+     */
+    data class ErrorDialog(
         private val msgInfo: String?,
         private val showToast: Boolean = false,
         private val codeInfo: Int = 0
@@ -44,6 +56,12 @@ sealed class ViewState(
 
     /**
      * 加载成功
+     *
+     * @param isDialog 是否弹出dialog
+     * @param msgInfo 成功信息
      */
-    data object Success : ViewState(code = 200)
+    data class Success(
+        private val isDialog: Boolean = false,
+        private val msgInfo: String? = null
+    ) : ViewState(code = 200, isToast = isDialog, msg = msgInfo)
 }

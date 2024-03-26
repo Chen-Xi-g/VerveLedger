@@ -12,4 +12,6 @@
     <color name="color_on_primary_container">#FFAF24</color>
     <color name="color_secondary_container">#FBE9E7</color>
     <color name="color_line">#E5E4F4</color>
+    <color name="color_home_income_bg">#00A86B</color>
+    <color name="color_home_expenses_bg">#FD3C4A</color>
 </resources>

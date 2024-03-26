@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/base_bg_dialog"
-    android:minWidth="100dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:alpha="0.9"
-    android:paddingHorizontal="10dp"
-    android:layout_gravity="center"
-    android:paddingVertical="10dp"
-    android:gravity="center"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/base_loading_animation"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:scaleType="centerCrop"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/base_animation_loading_dialog" />
+    <data>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/base_loading_text"
+    </data>
+
+    <LinearLayout
+        android:background="@drawable/base_bg_dialog"
+        android:minWidth="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:text="@string/base_loading_text"
-        android:textColor="@color/color_surface"
-        android:textSize="12sp" />
-</LinearLayout>
+        android:alpha="0.9"
+        android:paddingHorizontal="10dp"
+        android:layout_gravity="center"
+        android:paddingVertical="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/base_loading_animation"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/base_animation_loading_dialog" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/base_loading_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="@string/base_loading_text"
+            android:textColor="@color/color_surface"
+            android:textSize="12sp" />
+    </LinearLayout>
+</layout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/dialog_success_animation"
+        android:padding="20dp"
+        android:layout_width="166dp"
+        android:layout_height="166dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/ic_anim_dialog_error" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dialog_success_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:gravity="center"
+        android:textColor="@color/dialog_title"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_success_animation"
+        tools:text="失败" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:id="@+id/dialog_success_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@color/dialog_desc"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_success_text"
+        tools:text="操作失败，请重新尝试" />
+
+    <View
+        android:id="@+id/v_line_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/dialog_line"
+        app:layout_constraintTop_toBottomOf="@id/dialog_success_desc" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dialog_success_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingVertical="20dp"
+        android:textColor="@color/dialog_btn_error"
+        android:textSize="12sp"
+        android:text="@string/dialog_confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_line_bottom"
+        tools:text="知道了" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

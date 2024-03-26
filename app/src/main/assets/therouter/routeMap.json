@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "path": "/app/MainActivity",
+    "className": "com.griffin.ledger.ui.component.MainActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  }
+]

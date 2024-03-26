@@ -1,44 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/color_surface"
-    android:layout_width="match_parent"
-    android:layout_height="45dp"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/base_back_button"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center_vertical"
-        android:background="@null"
-        android:padding="5dp"
-        android:scaleType="centerInside"
-        android:tint="@color/color_onBackground"
-        android:src="@drawable/base_ic_arrow_left" />
+    <data>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/base_title_text"
+    </data>
+
+    <FrameLayout
+        android:background="@color/color_surface"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginHorizontal="55dp"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:maxLines="1"
-        android:textColor="@color/color_onBackground"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        tools:text="标题栏" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/base_menu_button"
-        android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_gravity="end|center_vertical"
-        android:background="@null"
-        android:padding="5dp"
-        android:scaleType="centerInside"
-        android:visibility="gone" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/base_back_button"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
+            android:background="@null"
+            android:padding="5dp"
+            android:scaleType="centerInside"
+            android:tint="@color/color_onBackground"
+            android:src="@drawable/base_ic_arrow_left" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/base_title_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="55dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@color/color_onBackground"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:text="标题栏" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/base_menu_button"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="end|center_vertical"
+            android:background="@null"
+            android:padding="5dp"
+            android:scaleType="centerInside"
+            android:visibility="gone" />
+
+    </FrameLayout>
+</layout>

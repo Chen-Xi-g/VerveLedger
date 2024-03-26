@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.webkit.WebSettings
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.griffin.core.base.R
 import com.griffin.core.base.activity.HiltBaseActivity
 import com.griffin.core.base.databinding.BaseActivityWebBinding
 import com.therouter.router.Autowired
@@ -13,7 +14,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class WebActivity : HiltBaseActivity<BaseActivityWebBinding>() {
+class WebActivity : HiltBaseActivity<BaseActivityWebBinding>(R.layout.base_activity_web) {
 
     companion object{
 

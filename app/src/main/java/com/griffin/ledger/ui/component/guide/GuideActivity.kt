@@ -3,12 +3,14 @@ package com.griffin.ledger.ui.component.guide
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
-import com.griffin.core.utils.mmkv.start
+import com.griffin.core.utils.mmkv.BaseMV
+import com.griffin.core.utils.start
+import com.griffin.feature.login.component.LoginActivity
 import com.griffin.ledger.R
 import com.griffin.ledger.databinding.ActivityGuideBinding
 import com.griffin.ledger.ui.adapter.GuideViewPager2Adapter
-import com.griffin.ledger.ui.component.MainActivity
 
 class GuideActivity : AppCompatActivity() {
 
@@ -16,20 +18,20 @@ class GuideActivity : AppCompatActivity() {
         GuideViewPager2Adapter(supportFragmentManager, lifecycle)
     }
 
-    private val binding by lazy {
-        ActivityGuideBinding.inflate(layoutInflater)
-    }
+    private lateinit var binding: ActivityGuideBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_guide)
         initAdapter()
         binding.tvIndex.text = getString(R.string.app_format_index, "1", "2")
         binding.tvSkip.setOnClickListener {
-            start(MainActivity::class.java)
+            BaseMV.System.isFirst = false
+            start(LoginActivity::class.java)
         }
         binding.tvEnterApp.setOnClickListener {
-            start(MainActivity::class.java)
+            BaseMV.System.isFirst = false
+            start(LoginActivity::class.java)
         }
     }
 

@@ -4,15 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.annotation.LayoutRes
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.lifecycleScope
-import androidx.viewbinding.ViewBinding
-import com.dylanc.viewbinding.base.ViewBindingUtil
+import com.griffin.core.base.R
 import com.griffin.core.base.ViewState
 import com.griffin.core.base.databinding.BaseRootLayoutBinding
 import com.griffin.core.base.dialog.LoadingDialog
 import com.griffin.core.base.vm.BaseViewModel
-import com.griffin.core.utils.mmkv.toast
+import com.griffin.core.dialog.ErrorDialog
+import com.griffin.core.dialog.SuccessDialog
+import com.griffin.core.utils.gone
+import com.griffin.core.utils.toast
+import com.griffin.core.utils.visible
 import com.therouter.TheRouter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -21,7 +28,7 @@ import java.lang.reflect.ParameterizedType
 /**
  * 用于实现Hilt的ViewModel
  */
-abstract class HiltBaseFragment<VB : ViewBinding> : AbstractFragment() {
+abstract class HiltBaseFragment<DB : ViewDataBinding>(@LayoutRes val layoutResId: Int) : AbstractFragment() {
 
     /**
      * 根布局
@@ -32,7 +39,7 @@ abstract class HiltBaseFragment<VB : ViewBinding> : AbstractFragment() {
     /**
      * 泛型中的ViewBinding实例
      */
-    private lateinit var _binding: VB
+    private lateinit var _binding: DB
     val binding get() = _binding
 
     /**
@@ -45,6 +52,20 @@ abstract class HiltBaseFragment<VB : ViewBinding> : AbstractFragment() {
      */
     val loadingDialog by lazy {
         LoadingDialog(requireContext())
+    }
+
+    /**
+     * 错误弹窗
+     */
+    val errorDialog by lazy {
+        ErrorDialog(requireContext())
+    }
+
+    /**
+     * 成功弹窗
+     */
+    val successDialog by lazy {
+        SuccessDialog(requireContext())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,20 +94,21 @@ abstract class HiltBaseFragment<VB : ViewBinding> : AbstractFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?
     ): View {
-        _rootBinding = BaseRootLayoutBinding.inflate(inflater, container, false)
+        _rootBinding = DataBindingUtil.inflate(inflater, R.layout.base_root_layout, container, false)
+        _rootBinding.lifecycleOwner = this
         if (showTitleBar()) {
-            _rootBinding.baseTitleLayout.root.showAnim()
+            _rootBinding.baseTitleLayout.root.visible()
         } else {
-            _rootBinding.baseTitleLayout.root.hide()
+            _rootBinding.baseTitleLayout.root.gone()
         }
         initContent()
         return _rootBinding.root
     }
 
     private fun initContent() {
-        _binding = ViewBindingUtil.inflateWithGeneric(this, layoutInflater)
         _rootBinding.baseContentLayout.removeAllViews()
-        _rootBinding.baseContentLayout.addView(_binding.root)
+        _binding = DataBindingUtil.inflate(layoutInflater, layoutResId, _rootBinding.baseContentLayout, true)
+        _binding.lifecycleOwner = this
     }
 
     private fun initClick() {
@@ -106,12 +128,21 @@ abstract class HiltBaseFragment<VB : ViewBinding> : AbstractFragment() {
                 // 监听UI状态
                 when (it) {
                     is ViewState.Empty -> showEmpty(it.msg)
-                    is ViewState.Error -> {
-                        onError(it.msg, it.isToast, it.code)
+                    is ViewState.ErrorLayout -> {
+                        onError(it.msg, it.isToast,false, it.code)
+                    }
+                    is ViewState.ErrorDialog -> {
+                        onError(it.msg, it.isToast, true, it.code)
                     }
                     is ViewState.LoadingDialog -> showLoadingDialog(it.msg)
                     is ViewState.LoadingLayout -> showLoading(it.msg)
-                    ViewState.Success -> showContent()
+                    is ViewState.Success -> {
+                        if (it.isToast){
+                            successDialog(msg = it.msg)
+                        }else{
+                            showContent()
+                        }
+                    }
                 }
             }
         }
@@ -135,6 +166,8 @@ abstract class HiltBaseFragment<VB : ViewBinding> : AbstractFragment() {
         if (!msg.isNullOrEmpty()) {
             _rootBinding.baseLoadingLayout.baseLoadingText.text = msg
         }
+        successDialog.dismiss()
+        errorDialog.dismiss()
         loadingDialog.dismiss()
         _rootBinding.baseLoadingLayout.root.showAnim()
         _rootBinding.baseEmptyLayout.root.hide()
@@ -148,6 +181,8 @@ abstract class HiltBaseFragment<VB : ViewBinding> : AbstractFragment() {
      * @param msg 提示信息
      */
     fun showLoadingDialog(msg: String? = null) {
+        successDialog.dismiss()
+        errorDialog.dismiss()
         if (!msg.isNullOrEmpty()) {
             loadingDialog.updateText(msg)
         }
@@ -163,6 +198,8 @@ abstract class HiltBaseFragment<VB : ViewBinding> : AbstractFragment() {
         if (!msg.isNullOrEmpty()) {
             _rootBinding.baseEmptyLayout.baseEmptyText.text = msg
         }
+        successDialog.dismiss()
+        errorDialog.dismiss()
         loadingDialog.dismiss()
         _rootBinding.baseLoadingLayout.root.hide()
         _rootBinding.baseEmptyLayout.root.showAnim()
@@ -177,11 +214,59 @@ abstract class HiltBaseFragment<VB : ViewBinding> : AbstractFragment() {
      */
     fun showError(msg: String? = null) {
         _rootBinding.baseErrorLayout.baseLoadingText.text = msg
+        successDialog.dismiss()
+        errorDialog.dismiss()
         loadingDialog.dismiss()
         _rootBinding.baseLoadingLayout.root.hide()
         _rootBinding.baseEmptyLayout.root.hide()
         _rootBinding.baseErrorLayout.root.showAnim()
         _rootBinding.baseContentLayout.hide()
+    }
+
+    /**
+     * 显示错误弹窗
+     */
+    fun errorDialog(msg: String? = null) {
+        successDialog.dismiss()
+        loadingDialog.dismiss()
+        if (!msg.isNullOrEmpty()) {
+            errorDialog.updateDesc(msg)
+        }
+        errorDialog.show()
+    }
+
+    /**
+     * 显示成功弹窗
+     */
+    fun successDialog(msg: String? = null) {
+        loadingDialog.dismiss()
+        errorDialog.dismiss()
+        if (!msg.isNullOrEmpty()) {
+            successDialog.updateDesc(msg)
+        }
+        successDialog.show()
+    }
+
+    override fun onError(message: String?,isToast: Boolean, isDialog: Boolean, code: Int?) {
+        if (isDialog){
+            if (isToast){
+                showContent()
+                // 弹出toast
+                message?.toast()
+            }else{
+                // 显示错误弹窗
+                errorDialog(message)
+            }
+        }else{
+            if (isToast){
+                showContent()
+                // 弹出toast
+                message?.toast()
+            }else{
+                // 显示错误布局
+                showError(message)
+            }
+        }
     }
 
     /**
@@ -213,14 +298,15 @@ abstract class HiltBaseFragment<VB : ViewBinding> : AbstractFragment() {
         visibility = View.INVISIBLE
     }
 
-    override fun onError(message: String?, isToast: Boolean, code: Int?) {
-        if (isToast){
-            showContent()
-            // 弹出toast
-            message?.toast()
-        }else{
-            // 显示错误布局
-            showError(message)
+    /**
+     * 根布局的padding
+     */
+    open fun rootPadding(){
+        ViewCompat.setOnApplyWindowInsetsListener(_rootBinding.root) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(0, systemBars.top, 0, 0)
+            insets
         }
     }
+
 }

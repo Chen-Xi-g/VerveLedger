@@ -5,6 +5,7 @@ import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.griffin.core.network.BuildConfig
 import com.griffin.core.network.api.CommonApi
+import com.griffin.core.network.api.UserApi
 import com.griffin.core.network.constant.NetworkConstant
 import com.griffin.core.network.interceptor.ParameterInterceptor
 import com.griffin.core.network.interceptor.ResponseInterceptor
@@ -72,6 +73,18 @@ object NetworkModel {
     @Provides
     @Singleton
     fun provideCommonRetrofit(callFactory: Call.Factory, json: Json): CommonApi = Retrofit.Builder()
+        .baseUrl(BuildConfig.SERVER_URL + NetworkConstant.BASE_URL)
+        .callFactory(callFactory)
+        .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+        .build()
+        .create()
+
+    /**
+     * 提供用户Api的Retrofit
+     */
+    @Provides
+    @Singleton
+    fun provideUserRetrofit(callFactory: Call.Factory, json: Json): UserApi = Retrofit.Builder()
         .baseUrl(BuildConfig.SERVER_URL + NetworkConstant.BASE_URL)
         .callFactory(callFactory)
         .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))

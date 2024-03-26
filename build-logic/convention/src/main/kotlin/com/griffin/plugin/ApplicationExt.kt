@@ -82,7 +82,9 @@ internal fun Project.configureApplication(
         }
 
         buildFeatures {
-            viewBinding = true
+            dataBinding{
+                enable = true
+            }
         }
 
         // 指定选项和规则
@@ -162,7 +164,9 @@ internal fun Project.configureLibrary(
         }
 
         buildFeatures {
-            viewBinding = true
+            dataBinding{
+                enable = true
+            }
         }
 
         // 指定选项和规则

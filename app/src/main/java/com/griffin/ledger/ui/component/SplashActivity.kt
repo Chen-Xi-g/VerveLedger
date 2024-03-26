@@ -9,8 +9,10 @@ import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
-import com.griffin.core.utils.mmkv.start
+import com.griffin.core.utils.mmkv.BaseMV
+import com.griffin.core.utils.start
 import com.griffin.feature.login.component.LoginActivity
+import com.griffin.ledger.ui.component.guide.GuideActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -50,9 +52,8 @@ class SplashActivity : AppCompatActivity() {
                 zoomY.interpolator = AccelerateInterpolator()
                 zoomY.duration = 500
                 zoomY.doOnEnd {
-                    start(LoginActivity::class.java)
                     screen.remove()
-                    finish()
+                    startMain()
                 }
 
                 zoomY.start()
@@ -62,6 +63,18 @@ class SplashActivity : AppCompatActivity() {
         lifecycleScope.launch {
             delay(SPLASH_WAIT_TIME)
             isSplashScreenRemoved = false
+        }
+    }
+
+    private fun startMain(){
+        if (BaseMV.System.isFirst) {
+            start(GuideActivity::class.java)
+            return
+        }
+        if (BaseMV.User.token.isNullOrBlank()){
+            start(LoginActivity::class.java)
+        }else{
+            start(MainActivity::class.java)
         }
     }
 }

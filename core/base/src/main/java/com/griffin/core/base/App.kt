@@ -1,7 +1,7 @@
 package com.griffin.core.base
 
 import android.app.Application
-import com.griffin.core.utils.mmkv.Utils
+import com.griffin.core.utils.Utils
 import me.jessyan.autosize.AutoSizeConfig
 
 open class App : Application() {

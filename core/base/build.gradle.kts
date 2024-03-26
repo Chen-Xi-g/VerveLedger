@@ -15,9 +15,9 @@ dependencies {
     implementation(project(":core:data"))
     implementation(project(":core:utils"))
     implementation(project(":core:network"))
+    implementation(project(":core:dialog"))
     implementation(libs.kotlin.coroutines)
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lottie)
-    implementation(libs.viewbinding.util)
     implementation(libs.autoSize)
 }

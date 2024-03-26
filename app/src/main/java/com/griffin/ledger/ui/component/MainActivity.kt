@@ -4,13 +4,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.griffin.core.base.activity.BaseActivity
+import com.griffin.core.router.RoutePath
 import com.griffin.ledger.R
-import com.griffin.ledger.ui.adapter.MainViewPager2Adapter
 import com.griffin.ledger.databinding.ActivityMainBinding
+import com.griffin.ledger.ui.adapter.MainViewPager2Adapter
+import com.therouter.router.Route
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class MainActivity : BaseActivity<MainVM, ActivityMainBinding>() {
+@AndroidEntryPoint
+@Route(path = RoutePath.Main.MAIN)
+class MainActivity : BaseActivity<MainVM, ActivityMainBinding>(R.layout.activity_main) {
 
     private val viewPager2Adapter by lazy {
         MainViewPager2Adapter(supportFragmentManager, lifecycle)

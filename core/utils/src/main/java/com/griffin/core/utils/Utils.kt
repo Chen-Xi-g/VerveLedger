@@ -1,4 +1,4 @@
-package com.griffin.core.utils.mmkv
+package com.griffin.core.utils
 
 import android.annotation.SuppressLint
 import android.app.Application

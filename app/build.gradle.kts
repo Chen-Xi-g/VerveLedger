@@ -16,6 +16,7 @@ android {
 
 dependencies {
     implementation(project(":core:base"))
+    implementation(project(":core:router"))
     implementation(project(":core:utils"))
     implementation(project(":feature:login"))
     implementation(project(":feature:home"))

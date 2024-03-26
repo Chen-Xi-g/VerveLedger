@@ -31,7 +31,7 @@ class WebViewModel @Inject constructor(
      */
     fun getAgreementContent(type: Int) {
         handleRequest({ commonDataSource.agreement(type) }) {
-            _agreementContent.value = it
+            _agreementContent.value = it.data ?: ""
         }
     }
 

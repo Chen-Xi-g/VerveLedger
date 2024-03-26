@@ -12,40 +12,39 @@ import androidx.activity.viewModels
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import com.griffin.core.base.activity.BaseActivity
 import com.griffin.core.base.activity.HiltBaseActivity
-import com.griffin.core.base.vm.BaseViewModel
 import com.griffin.core.base.web.WebActivity
-import com.griffin.core.utils.mmkv.gone
-import com.griffin.core.utils.mmkv.start
-import com.griffin.core.utils.mmkv.toast
+import com.griffin.core.data.model.CaptchaImageModel
+import com.griffin.core.router.RoutePath
+import com.griffin.core.utils.gone
+import com.griffin.core.utils.start
+import com.griffin.core.utils.statusHeight
+import com.griffin.core.utils.toast
 import com.griffin.feature.login.R
+import com.griffin.feature.login.component.activate.ActivateActivity
+import com.griffin.feature.login.component.forget.ForgetActivity
+import com.griffin.feature.login.component.register.RegisterActivity
 import com.griffin.feature.login.databinding.ActivityLoginBinding
+import com.therouter.TheRouter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class LoginActivity : HiltBaseActivity<ActivityLoginBinding>() {
+class LoginActivity : HiltBaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
+
+    override val viewModel: LoginViewModel by viewModels()
 
     private var doubleBackToExitPressedOnce = false
 
     override fun initView(savedInstanceState: Bundle?) {
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            // 修改v_padding的高度
-            binding.vPadding.layoutParams.height = systemBars.top
-            insets
-        }
-        // 透明状态栏
+        binding.vPadding.statusHeight()
         rootBinding.baseTitleLayout.root.gone()
         showContent()
         initClick()
         initSpannable()
         initBackPress()
     }
-
-    override val viewModel: LoginViewModel by viewModels()
 
     override fun obtainData() {
         refreshCode()
@@ -54,14 +53,35 @@ class LoginActivity : HiltBaseActivity<ActivityLoginBinding>() {
     override fun registerObserver() {
         super.registerObserver()
         lifecycleScope.launch {
-            viewModel.captchaImage.collectLatest {
-                binding.ivCodeContent.setImageBitmap(it.bitmap)
+            viewModel.flow.collectLatest {
+                if (it is CaptchaImageModel) {
+                    binding.ivCodeContent.setImageBitmap(it.bitmap)
+                } else if (it is Boolean && it) {
+                    TheRouter.build(RoutePath.Main.MAIN)
+                        .navigation()
+                    finish()
+                }
             }
         }
     }
 
-    private fun initClick(){
+    private fun initClick() {
         binding.ivCodeContent.setOnClickListener {
+            refreshCode()
+        }
+        binding.tvRegister.setOnClickListener {
+            start(RegisterActivity::class.java, isFinish = false)
+        }
+        binding.tvForgetPassword.setOnClickListener {
+            start(ForgetActivity::class.java, isFinish = false)
+        }
+        binding.tvActivateAccount.setOnClickListener {
+            start(ActivateActivity::class.java, isFinish = false)
+        }
+        binding.tvLogin.setOnClickListener {
+            login()
+        }
+        errorDialog.setOnDismissListener {
             refreshCode()
         }
     }
@@ -131,8 +151,15 @@ class LoginActivity : HiltBaseActivity<ActivityLoginBinding>() {
     override fun paddingWindow() {
     }
 
-    private fun refreshCode(){
+    private fun refreshCode() {
         viewModel.getCaptchaImage()
+    }
+
+    private fun login(){
+        val username = binding.etUsername.text.toString()
+        val password = binding.etPassword.text.toString()
+        val code = binding.etCode.text.toString()
+        viewModel.login(username, password, code)
     }
 
 }

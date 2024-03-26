@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dialog_bg">#FFFFFF</color>
+    <color name="dialog_title">#333333</color>
+    <color name="dialog_desc">#7985A8</color>
+    <color name="dialog_line">#E5E4F4</color>
+    <color name="dialog_btn_success">#FD7D18</color>
+    <color name="dialog_btn_error">#B3261E</color>
+</resources>

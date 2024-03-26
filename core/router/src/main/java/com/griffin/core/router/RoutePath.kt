@@ -5,6 +5,10 @@ package com.griffin.core.router
  */
 object RoutePath {
 
+    object Main {
+        const val MAIN = "/app/MainActivity"
+    }
+
     object Login {
         const val LOGIN = "/login/LoginMainActivity"
     }

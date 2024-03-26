@@ -38,8 +38,9 @@ abstract class AbstractActivity : AppCompatActivity(){
      *
      * @param message 错误信息
      * @param isToast 是否弹出toast
+     * @param isDialog 是否弹出dialog
      * @param code 错误码
      */
-    open fun onError(message: String?,isToast: Boolean, code: Int?) {}
+    open fun onError(message: String?,isToast: Boolean, isDialog: Boolean, code: Int?) {}
 
 }

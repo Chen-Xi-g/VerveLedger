@@ -30,9 +30,11 @@ class FeatureConventionPlugin : Plugin<Project>{
                 add("implementation", libs.findLibrary("lifecycle-viewmodel").get())
                 add("implementation", project(":core:base"))
                 add("implementation", project(":core:data"))
+                add("implementation", project(":core:dialog"))
                 add("implementation", project(":core:domain"))
                 add("implementation", project(":core:network"))
                 add("implementation", project(":core:router"))
+                add("implementation", project(":core:rv"))
                 add("implementation", project(":core:utils"))
             }
         }

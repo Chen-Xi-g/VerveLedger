@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.annotation.StyleRes
 import androidx.appcompat.widget.AppCompatTextView
 import com.griffin.core.base.R
-import com.griffin.core.utils.mmkv.runMain
+import com.griffin.core.utils.runMain
 
 /**
  * 加载中弹窗
@@ -34,12 +34,9 @@ class LoadingDialog(
     }
 
     fun updateText(text: String) {
-        if (isShowing){
-            runMain {
-                tvLoadingText?.text = text
-            }
-        }else{
-            title = text
+        runMain {
+            tvLoadingText?.text = text
         }
+        title = text
     }
 }

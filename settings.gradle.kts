@@ -27,9 +27,11 @@ include(":app")
 // core
 include(":core:base")
 include(":core:data")
+include(":core:dialog")
 include(":core:domain")
 include(":core:network")
 include(":core:router")
+include(":core:rv")
 include(":core:utils")
 // feature
 include(":feature:home")
