@@ -7,13 +7,18 @@ import com.tencent.mmkv.MMKV
 
 @SuppressLint("StaticFieldLeak")
 object Utils {
-    internal lateinit var context: Context
+    lateinit var context: Context
 
     /**
      * 初始化 MMKV
      */
-    fun initialize(application: Application){
+    fun initialize(application: Application, isDebug: Boolean = false){
         context = application
         MMKV.initialize(application)
+        if (isDebug){
+            LogUtils.isOpen = true
+        }else{
+            LogUtils.closeLog()
+        }
     }
 }

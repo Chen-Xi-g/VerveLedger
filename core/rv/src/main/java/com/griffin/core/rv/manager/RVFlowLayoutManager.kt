@@ -48,13 +48,13 @@ class RVFlowLayoutManager : RecyclerView.LayoutManager() {
         )
     }
 
-    override fun onLayoutChildren(recycler: RecyclerView.Recycler, state: RecyclerView.State) {
+    override fun onLayoutChildren(recycler: RecyclerView.Recycler, state: State) {
         totalHeight = 0
         var cuLineTop = top
         // 当前行使用的宽度
         var cuLineWidth = 0
-        var itemLeft = 0
-        var itemTop = 0
+        var itemLeft: Int
+        var itemTop: Int
         var maxHeightItem = 0
         row = Row()
         lineRows.clear()
@@ -121,10 +121,10 @@ class RVFlowLayoutManager : RecyclerView.LayoutManager() {
             }
         }
         totalHeight = Math.max(totalHeight, getVerticalSpace())
-        fillLayout(recycler, state)
+        fillLayout(state)
     }
 
-    private fun fillLayout(recycler: RecyclerView.Recycler, state: State) {
+    private fun fillLayout(state: State) {
         if (state.isPreLayout || itemCount == 0) return
         lineRows.forEach {
             it.views.forEachIndexed { index, item ->
@@ -185,7 +185,7 @@ class RVFlowLayoutManager : RecyclerView.LayoutManager() {
         verticalScrollOffset += travel
 
         offsetChildrenVertical(-travel)
-        fillLayout(recycler, state)
+        fillLayout(state)
         return travel
     }
 

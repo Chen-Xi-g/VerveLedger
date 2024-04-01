@@ -4,7 +4,10 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.griffin.core.network.BuildConfig
+import com.griffin.core.network.api.AccountApi
+import com.griffin.core.network.api.BillApi
 import com.griffin.core.network.api.CommonApi
+import com.griffin.core.network.api.TypeApi
 import com.griffin.core.network.api.UserApi
 import com.griffin.core.network.constant.NetworkConstant
 import com.griffin.core.network.interceptor.ParameterInterceptor
@@ -85,6 +88,42 @@ object NetworkModel {
     @Provides
     @Singleton
     fun provideUserRetrofit(callFactory: Call.Factory, json: Json): UserApi = Retrofit.Builder()
+        .baseUrl(BuildConfig.SERVER_URL + NetworkConstant.BASE_URL)
+        .callFactory(callFactory)
+        .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+        .build()
+        .create()
+
+    /**
+     * 提供用户Api的Retrofit
+     */
+    @Provides
+    @Singleton
+    fun provideBillRetrofit(callFactory: Call.Factory, json: Json): BillApi = Retrofit.Builder()
+        .baseUrl(BuildConfig.SERVER_URL + NetworkConstant.BASE_URL)
+        .callFactory(callFactory)
+        .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+        .build()
+        .create()
+
+    /**
+     * 提供类型Api的Retrofit
+     */
+    @Provides
+    @Singleton
+    fun provideTypeRetrofit(callFactory: Call.Factory, json: Json): TypeApi = Retrofit.Builder()
+        .baseUrl(BuildConfig.SERVER_URL + NetworkConstant.BASE_URL)
+        .callFactory(callFactory)
+        .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+        .build()
+        .create()
+
+    /**
+     * 提供账户Api的Retrofit
+     */
+    @Provides
+    @Singleton
+    fun provideAccountRetrofit(callFactory: Call.Factory, json: Json): AccountApi = Retrofit.Builder()
         .baseUrl(BuildConfig.SERVER_URL + NetworkConstant.BASE_URL)
         .callFactory(callFactory)
         .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))

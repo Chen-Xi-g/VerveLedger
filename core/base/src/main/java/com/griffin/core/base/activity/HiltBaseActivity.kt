@@ -88,13 +88,13 @@ abstract class HiltBaseActivity<DB: ViewDataBinding>(@LayoutRes val layoutResId:
         // 设置默认布局
         _rootBinding = DataBindingUtil.setContentView(this, R.layout.base_root_layout)
         _rootBinding.lifecycleOwner = this
-        paddingWindow()
         initContent()
-        registerObserver()
         initClick()
         _rootBinding.baseLoadingLayout.root.showAnim()
         initView(savedInstanceState)
+        paddingWindow()
         obtainData()
+        registerObserver()
     }
 
     private fun initContent() {

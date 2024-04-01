@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.amap.api.services.help.Tip" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_location"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="10dp"
+            android:padding="6dp"
+            android:src="@drawable/map_ic_location"
+            android:tint="@color/color_text_hint"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:rotation="270"
+            android:src="@drawable/map_ic_arrow_side"
+            android:tint="@color/color_text_hint"
+            app:layout_constraintBottom_toBottomOf="@id/tv_name"
+            app:layout_constraintEnd_toEndOf="@id/tv_district"
+            app:layout_constraintTop_toTopOf="@id/tv_name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{item.name}"
+            android:textColor="@color/color_onSurface"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_address"
+            app:layout_constraintEnd_toStartOf="@id/iv_icon"
+            app:layout_constraintStart_toEndOf="@id/iv_location"
+            app:layout_constraintTop_toTopOf="@id/iv_location"
+            tools:text="搜索地点名称" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{item.address}"
+            android:textColor="@color/color_text_hint"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_location"
+            app:layout_constraintEnd_toStartOf="@id/tv_district"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_name"
+            tools:text="地点的准确位置，某某街道等" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_district"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:text="@{item.district}"
+            android:textColor="@color/color_text_hint"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_address"
+            tools:text="0.4m" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

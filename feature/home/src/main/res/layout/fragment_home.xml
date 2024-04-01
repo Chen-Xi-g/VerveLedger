@@ -5,230 +5,248 @@
 
     <data>
 
+        <import type="com.griffin.core.utils.StringUtilsKt" />
+
+        <variable
+            name="vm"
+            type="com.griffin.feature.home.ui.component.HomeViewModel" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:srlEnableLoadMore="false">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.scwang.smart.refresh.header.MaterialHeader
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp">
+            android:layout_height="wrap_content"/>
 
-            <View
-                android:id="@+id/v_padding"
-                android:layout_width="1px"
-                android:layout_height="1px"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/v_bg_top"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@drawable/home_bg_top_shape"
-                app:layout_constraintBottom_toBottomOf="@id/v_line_top"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_app_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/home_str_app_name"
-                android:textColor="@color/color_onBackground"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/v_padding" />
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/ib_map"
-                android:layout_width="55dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:paddingHorizontal="15dp"
-                android:src="@drawable/home_ic_map"
-                android:tint="@color/color_onSurface"
-                app:layout_constraintBottom_toBottomOf="@id/tv_app_name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_app_name" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_available_balance_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/home_str_available_balance"
-                android:textColor="@color/color_text_hint"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_app_name" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_available_balance"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="40dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:textColor="@color/color_onBackground"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_available_balance_title"
-                tools:text="￥1200" />
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_income"
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="27dp"
-                android:background="@drawable/home_bg_income_shape"
-                app:layout_constraintEnd_toStartOf="@id/cl_expenses"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_available_balance">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_income"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="15dp"
-                    android:src="@drawable/home_ic_income"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <View
+                    android:id="@+id/v_padding"
+                    android:layout_width="1px"
+                    android:layout_height="1px"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/v_bg_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:background="@drawable/home_bg_top_shape"
+                    app:layout_constraintBottom_toBottomOf="@id/v_line_top"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_income_title"
-                    android:layout_width="0dp"
+                    android:id="@+id/tv_app_name"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="15dp"
-                    android:text="@string/home_str_month_income"
-                    android:textColor="@color/color_surface"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/iv_income"
-                    app:layout_constraintTop_toTopOf="@id/iv_income" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_income"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textColor="@color/color_surface"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_income"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/tv_income_title"
-                    tools:text="￥1200000" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_expenses"
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="27dp"
-                android:layout_marginEnd="15dp"
-                android:background="@drawable/home_bg_expenses_shape"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/cl_income"
-                app:layout_constraintTop_toBottomOf="@id/tv_available_balance">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_expenses"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
                     android:layout_marginStart="15dp"
-                    android:src="@drawable/home_ic_expenses"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/home_str_app_name"
+                    android:textColor="@color/color_onBackground"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/v_padding" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/ib_map"
+                    android:layout_width="55dp"
+                    android:layout_height="40dp"
+                    android:background="@null"
+                    android:paddingHorizontal="15dp"
+                    android:src="@drawable/home_ic_map"
+                    android:tint="@color/color_onSurface"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_app_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_app_name" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_expenses_title"
-                    android:layout_width="0dp"
+                    android:id="@+id/tv_available_balance_title"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="15dp"
-                    android:text="@string/home_str_month_expenses"
-                    android:textColor="@color/color_surface"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/home_str_available_balance"
+                    android:textColor="@color/color_text_hint"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/iv_expenses"
-                    app:layout_constraintTop_toTopOf="@id/iv_expenses" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_app_name" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_expenses"
+                    android:id="@+id/tv_available_balance"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textColor="@color/color_surface"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_expenses"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="@{StringUtilsKt.f2yFirst(vm.surplus)}"
+                    android:textColor="@color/color_onBackground"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/tv_expenses_title"
-                    tools:text="￥1200000" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_available_balance_title"
+                    tools:text="￥1200" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_income"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="27dp"
+                    android:background="@drawable/home_bg_income_shape"
+                    app:layout_constraintEnd_toStartOf="@id/cl_expenses"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_available_balance">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_income"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="15dp"
+                        android:src="@drawable/home_ic_income"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_income_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:text="@string/home_str_month_income"
+                        android:textColor="@color/color_surface"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_income"
+                        app:layout_constraintTop_toTopOf="@id/iv_income" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_income"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@{StringUtilsKt.f2yFirst(vm.income)}"
+                        android:textColor="@color/color_surface"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_income"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tv_income_title"
+                        tools:text="￥1200000" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_expenses"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="27dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/home_bg_expenses_shape"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cl_income"
+                    app:layout_constraintTop_toBottomOf="@id/tv_available_balance">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_expenses"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="15dp"
+                        android:src="@drawable/home_ic_expenses"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_expenses_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="15dp"
+                        android:text="@string/home_str_month_expenses"
+                        android:textColor="@color/color_surface"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/iv_expenses"
+                        app:layout_constraintTop_toTopOf="@id/iv_expenses" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_expenses"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@{StringUtilsKt.f2yFirst(vm.expenses)}"
+                        android:textColor="@color/color_surface"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@id/iv_expenses"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tv_expenses_title"
+                        tools:text="￥1200000" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/v_line_top"
+                    android:layout_width="1px"
+                    android:layout_height="23dp"
+                    app:layout_constraintStart_toStartOf="@id/cl_income"
+                    app:layout_constraintTop_toBottomOf="@id/cl_income" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_detail_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/home_str_month_detail"
+                    android:textColor="@color/color_onBackground"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/v_bg_top" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/ib_filter"
+                    android:layout_width="55dp"
+                    android:layout_height="40dp"
+                    android:background="@null"
+                    android:paddingHorizontal="15dp"
+                    android:src="@drawable/home_ic_calendar"
+                    android:tint="@color/color_onSurface"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_detail_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_detail_title" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_detail_title"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/adapter_home_bill" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:id="@+id/v_line_top"
-                android:layout_width="1px"
-                android:layout_height="23dp"
-                app:layout_constraintStart_toStartOf="@id/cl_income"
-                app:layout_constraintTop_toBottomOf="@id/cl_income" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:paddingVertical="8dp"
-                android:layout_marginStart="15dp"
-                android:id="@+id/tv_detail_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/home_str_month_detail"
-                android:textColor="@color/color_onBackground"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/v_bg_top" />
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/ib_filter"
-                android:layout_width="55dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:paddingHorizontal="15dp"
-                android:src="@drawable/home_ic_calendar"
-                android:tint="@color/color_onSurface"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_detail_title"
-                app:layout_constraintBottom_toBottomOf="@id/tv_detail_title" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_detail"
-                tools:itemCount="3"
-                tools:listitem="@layout/adapter_home_bill"
-                app:layout_constraintTop_toBottomOf="@id/tv_detail_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </layout>

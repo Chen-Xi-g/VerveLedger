@@ -12,7 +12,7 @@ import com.griffin.core.rv.manager.RVStaggeredGridLayoutManager
  */
 val RecyclerView.reuseAdapter
     get() = adapter as? ReuseAdapter
-        ?: throw NullPointerException("RecyclerView has no BindingAdapter")
+        ?: throw NullPointerException("RecyclerView has no ReuseAdapter")
 
 /**
  * 获取适配器数据集
@@ -172,7 +172,6 @@ fun RecyclerView.staggered(
  */
 fun RecyclerView.flow(
     scrollEnabled: Boolean = true,
-    stackFromEnd: Boolean = false
 ): RecyclerView {
     layoutManager = RVFlowLayoutManager().apply {
         setScrollEnabled(scrollEnabled)

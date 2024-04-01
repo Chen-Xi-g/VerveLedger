@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+
+        <import type="com.griffin.core.utils.StringUtilsKt" />
+
+        <variable
+            name="item"
+            type="com.griffin.core.data.model.AccountListModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/electronic_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@{TextUtils.equals(`微信支付`, item.cardName) ? @drawable/account_bg_wx : @drawable/account_bg_alipay}"
+            android:padding="15dp"
+            android:visibility="@{TextUtils.equals(`00`, item.type) ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_electronic_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.cardName}"
+                android:textColor="@color/color_surface"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="微信零钱" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_electronic_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end|center_vertical"
+                android:text="@{StringUtilsKt.f2yLast(item.balance)}"
+                android:textColor="@color/color_surface"
+                android:textSize="23sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_electronic_name"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="200.00￥" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/savings_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/account_bg_savings"
+            android:paddingHorizontal="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="8dp"
+            android:visibility="@{TextUtils.equals(`01`, item.type) ? View.VISIBLE : View.GONE}"
+            tools:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:text="@{item.cardName}"
+                android:id="@+id/tv_savings_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_onSurface"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="中国工商银行储蓄卡" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:text="@{StringUtilsKt.desensitization(item.cardCode)}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end|center_vertical"
+                android:textColor="@color/color_text_hint"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_savings_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_savings_name"
+                app:layout_constraintTop_toTopOf="@id/tv_savings_name"
+                tools:text="**** 1234" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:text="@{TextUtils.isEmpty(item.remark) ? `备注银行卡` : item.remark}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/account_bg_remark"
+                android:padding="4dp"
+                android:textColor="@color/color_text_hint"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_savings_amount"
+                app:layout_constraintStart_toStartOf="@id/tv_savings_name"
+                app:layout_constraintTop_toTopOf="@id/tv_savings_amount"
+                tools:ignore="SmallSp"
+                tools:text="备注银行卡" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:text="@{StringUtilsKt.f2yLast(item.balance)}"
+                android:id="@+id/tv_savings_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/color_onSurface"
+                android:textSize="23sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_savings_name"
+                tools:text="1000000.00￥" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+</layout>

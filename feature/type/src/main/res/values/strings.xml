@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="type_str_expenses">支出</string>
+    <string name="type_str_income">收入</string>
+</resources>

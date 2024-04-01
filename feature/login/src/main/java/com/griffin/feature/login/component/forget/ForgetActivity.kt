@@ -29,6 +29,7 @@ class ForgetActivity : HiltBaseActivity<ActivityForgetBinding>(R.layout.activity
      * 初始化View
      */
     override fun initView(savedInstanceState: Bundle?) {
+        binding.vm = viewModel
         binding.vPadding.statusHeight()
         rootBinding.baseTitleLayout.root.gone()
         showContent()
@@ -58,12 +59,6 @@ class ForgetActivity : HiltBaseActivity<ActivityForgetBinding>(R.layout.activity
         binding.ibBack.setOnClickListener {
             finish()
         }
-        binding.ivCodeContent.setOnClickListener {
-            refreshCode()
-        }
-        binding.tvForgetPassword.setOnClickListener {
-            forgetPwd()
-        }
         successDialog.setOnDismissListener {
             finish()
         }
@@ -79,20 +74,7 @@ class ForgetActivity : HiltBaseActivity<ActivityForgetBinding>(R.layout.activity
     }
 
     private fun refreshCode() {
-        viewModel.getCaptchaImage()
-    }
-
-    private fun forgetPwd(){
-        val username = binding.etUsername.text.toString()
-        val password = binding.etPassword.text.toString()
-        val confirmPassword = binding.etConfirmPassword.text.toString()
-        val code = binding.etCode.text.toString()
-        viewModel.forgetPwd(
-            username = username,
-            password = password,
-            confirmPassword = confirmPassword,
-            code = code
-        )
+        viewModel.refreshCode()
     }
 
 }

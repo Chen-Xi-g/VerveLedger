@@ -9,8 +9,6 @@ import android.text.style.ClickableSpan
 import android.view.View
 import androidx.activity.addCallback
 import androidx.activity.viewModels
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.griffin.core.base.activity.HiltBaseActivity
 import com.griffin.core.base.web.WebActivity
@@ -26,11 +24,13 @@ import com.griffin.feature.login.component.forget.ForgetActivity
 import com.griffin.feature.login.component.register.RegisterActivity
 import com.griffin.feature.login.databinding.ActivityLoginBinding
 import com.therouter.TheRouter
+import com.therouter.router.Route
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
+@Route(path = RoutePath.Login.LOGIN)
 class LoginActivity : HiltBaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
     override val viewModel: LoginViewModel by viewModels()
@@ -38,6 +38,7 @@ class LoginActivity : HiltBaseActivity<ActivityLoginBinding>(R.layout.activity_l
     private var doubleBackToExitPressedOnce = false
 
     override fun initView(savedInstanceState: Bundle?) {
+        binding.vm = viewModel
         binding.vPadding.statusHeight()
         rootBinding.baseTitleLayout.root.gone()
         showContent()
@@ -66,9 +67,6 @@ class LoginActivity : HiltBaseActivity<ActivityLoginBinding>(R.layout.activity_l
     }
 
     private fun initClick() {
-        binding.ivCodeContent.setOnClickListener {
-            refreshCode()
-        }
         binding.tvRegister.setOnClickListener {
             start(RegisterActivity::class.java, isFinish = false)
         }
@@ -77,9 +75,6 @@ class LoginActivity : HiltBaseActivity<ActivityLoginBinding>(R.layout.activity_l
         }
         binding.tvActivateAccount.setOnClickListener {
             start(ActivateActivity::class.java, isFinish = false)
-        }
-        binding.tvLogin.setOnClickListener {
-            login()
         }
         errorDialog.setOnDismissListener {
             refreshCode()
@@ -152,14 +147,7 @@ class LoginActivity : HiltBaseActivity<ActivityLoginBinding>(R.layout.activity_l
     }
 
     private fun refreshCode() {
-        viewModel.getCaptchaImage()
-    }
-
-    private fun login(){
-        val username = binding.etUsername.text.toString()
-        val password = binding.etPassword.text.toString()
-        val code = binding.etCode.text.toString()
-        viewModel.login(username, password, code)
+        viewModel.refreshCode()
     }
 
 }

@@ -10,7 +10,18 @@ object RoutePath {
     }
 
     object Login {
-        const val LOGIN = "/login/LoginMainActivity"
+        const val LOGIN = "/login/LoginActivity"
     }
 
+    object Type {
+        const val TYPE = "/type/TypeActivity"
+    }
+
+    object Account {
+        const val ACCOUNT = "/account/AccountActivity"
+    }
+
+    object Map {
+        const val MAP = "/map/MapActivity"
+    }
 }

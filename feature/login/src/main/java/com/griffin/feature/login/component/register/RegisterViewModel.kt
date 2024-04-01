@@ -3,6 +3,7 @@ package com.griffin.feature.login.component.register
 import androidx.lifecycle.viewModelScope
 import com.griffin.core.base.vm.BaseViewModel
 import com.griffin.core.data.model.CaptchaImageModel
+import com.griffin.core.data.model.state.LoginState
 import com.griffin.core.domain.use_case.validation.user.ValidationCode
 import com.griffin.core.domain.use_case.validation.user.ValidationEmail
 import com.griffin.core.domain.use_case.validation.user.ValidationPassword
@@ -46,6 +47,11 @@ class RegisterViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     /**
+     * 页面状态
+     */
+    val uiState = MutableStateFlow(LoginState())
+
+    /**
      * 图片验证码
      */
     private val _captchaImage = MutableStateFlow(CaptchaImageModel())
@@ -65,7 +71,7 @@ class RegisterViewModel @Inject constructor(
     /**
      * 获取验证码
      */
-    fun getCaptchaImage() {
+    private fun getCaptchaImage() {
         handleRequest({ commonDataSource.captchaImage() }, isLoadingDialog = null) {
             _captchaImage.value = it.data ?: CaptchaImageModel()
         }
@@ -80,7 +86,7 @@ class RegisterViewModel @Inject constructor(
      * @param confirmPassword 确认密码
      * @param username 用户名
      */
-    fun register(
+    private fun register(
         code: String,
         email: String,
         password: String,
@@ -121,5 +127,13 @@ class RegisterViewModel @Inject constructor(
                 _registerSuccess.emit(true)
             }
         }
+    }
+
+    fun registerClick(){
+        register(uiState.value.code, uiState.value.email, uiState.value.password, uiState.value.confirmPassword, uiState.value.username)
+    }
+
+    fun refreshCode(){
+        getCaptchaImage()
     }
 }

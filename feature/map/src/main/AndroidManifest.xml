@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!--允许程序设置内置sd卡的写权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--允许程序获取网络状态-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--允许程序访问WiFi网络信息-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--允许程序获取精准定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application tools:ignore="DiscouragedApi">
+
+        <activity
+            android:name=".component.MapActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <meta-data android:name="com.amap.api.v2.apikey" android:value="b5c9ab26f712df7a5b845d90727b2900"/>
+    </application>
+
+</manifest>

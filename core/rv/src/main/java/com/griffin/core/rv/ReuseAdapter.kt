@@ -1,6 +1,7 @@
 package com.griffin.core.rv
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.util.NoSuchPropertyException
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.griffin.core.rv.model.ICheckedEntity
 import com.griffin.core.rv.model.ItemExpand
+import com.griffin.core.rv.model.ItemStableId
 import com.griffin.core.rv.model.SelectSealed
 import java.util.concurrent.atomic.AtomicLong
 
@@ -226,7 +228,7 @@ open class ReuseAdapter : RecyclerView.Adapter<ReuseAdapter.BaseViewHolder>() {
     fun setChecked(position: Int, checked: Boolean) {
         // 避免冗余操作
         if ((checkedPosition.contains(position) && checked) ||
-            (!checked && !checkedPosition.contains(position)) || isCheck()
+            (!checked && !checkedPosition.contains(position)) || isCheck() || position < 0
         ) return
 
         // 实体类没有实现 ICheckedEntity 接口,直接return
@@ -251,7 +253,7 @@ open class ReuseAdapter : RecyclerView.Adapter<ReuseAdapter.BaseViewHolder>() {
      * 切换指定索引选中状态
      */
     fun checkedSwitch(position: Int) {
-        if (isCheck()) return
+        if (isCheck() && position < 0) return
         if (checkedPosition.contains(position)) {
             setChecked(position, false)
         } else {
@@ -490,13 +492,17 @@ open class ReuseAdapter : RecyclerView.Adapter<ReuseAdapter.BaseViewHolder>() {
      * @param index Int
      * @return T
      */
-    fun <T> getDataOrNull(index: Int): T? {
-        return if (isHeader(index)) {
-            headerList[index] as? T
-        } else if (isFooter(index)) {
-            footerList[index - headerCount - _list.size] as? T
-        } else {
-            _list.getOrNull(index - headerCount) as? T
+    inline fun <reified T> getDataOrNull(index: Int): T? {
+        return try {
+            if (isHeader(index)) {
+                headerList[index] as? T
+            } else if (isFooter(index)) {
+                footerList[index - headerCount - list.size] as? T
+            } else {
+                list.getOrNull(index - headerCount) as? T
+            }
+        } catch (e: Exception) {
+            return null
         }
     }
 
@@ -507,8 +513,14 @@ open class ReuseAdapter : RecyclerView.Adapter<ReuseAdapter.BaseViewHolder>() {
      */
     fun setData(list: List<Any?>?) {
         _list.clear()
+        checkedPosition.clear()
         if (!list.isNullOrEmpty()) {
-            _list.addAll(list)
+            list.forEach {
+                _list.add(it)
+                if (it is ItemExpand && it.itemExpand && !it.itemChildList.isNullOrEmpty()){
+                    _list.addAll(it.itemChildList ?: emptyList())
+                }
+            }
         }
         notifyDataSetChanged()
     }
@@ -591,6 +603,10 @@ open class ReuseAdapter : RecyclerView.Adapter<ReuseAdapter.BaseViewHolder>() {
         if (_list.size == size) {
             notifyDataSetChanged()
         }
+    }
+
+    override fun getItemId(position: Int): Long {
+        return getDataOrNull<ItemStableId>(position)?.getItemId() ?: RecyclerView.NO_ID
     }
 
     inner class BaseViewHolder(view: View) :

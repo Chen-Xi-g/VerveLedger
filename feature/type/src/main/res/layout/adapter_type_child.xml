@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="item"
+            type="com.griffin.core.data.model.TypeChildModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:background="@drawable/type_bg_item">
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:checked="@{item.selected}"
+            android:enabled="false"
+            android:id="@+id/cb_select"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginVertical="15dp"
+            android:layout_marginStart="10dp"
+            android:clickable="false"
+            android:button="@null"
+            android:drawableStart="@drawable/base_btn_check"
+            android:drawableTint="@color/color_primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:text="@{item.typeName}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="15dp"
+            android:textColor="@color/color_onSurface"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/cb_select"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cb_select"
+            app:layout_constraintTop_toTopOf="@id/cb_select"
+            tools:text="选择项1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

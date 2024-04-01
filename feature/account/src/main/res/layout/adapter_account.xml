@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="com.griffin.core.data.model.AccountModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_account_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@{TextUtils.equals(`00`,item.type) ? `电子账户` : `储蓄账户`}"
+            android:textColor="@color/color_onBackground"
+            android:textSize="15sp"
+            tools:text="电子账户" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_account_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/account_bg_number"
+            android:paddingHorizontal="13dp"
+            android:text="@{``+item.count}"
+            android:textColor="@color/color_surface"
+            android:textSize="12sp"
+            android:visibility="@{item.count > 0 ? View.VISIBLE : View.GONE}"
+            tools:text="2"
+            tools:visibility="visible" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_add"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="10dp"
+            android:src="@drawable/account_ic_add"
+            android:tint="@color/color_text_hint" />
+    </LinearLayout>
+</layout>

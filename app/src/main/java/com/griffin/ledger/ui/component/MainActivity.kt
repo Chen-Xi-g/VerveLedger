@@ -5,6 +5,8 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.griffin.core.base.activity.BaseActivity
 import com.griffin.core.router.RoutePath
+import com.griffin.core.utils.start
+import com.griffin.feature.add.component.AddActivity
 import com.griffin.ledger.R
 import com.griffin.ledger.databinding.ActivityMainBinding
 import com.griffin.ledger.ui.adapter.MainViewPager2Adapter
@@ -57,6 +59,9 @@ class MainActivity : BaseActivity<MainVM, ActivityMainBinding>(R.layout.activity
      * 初始化NavigationMenu
      */
     private fun initNavigationMenu(){
+        binding.fabAdd.setOnClickListener {
+            start(AddActivity::class.java, isFinish = false)
+        }
         binding.bottomAppBar.setOnApplyWindowInsetsListener(null)
         binding.bottomAppBar.setPadding(0,0,0,0)
         binding.bottomNavigationView.setOnApplyWindowInsetsListener(null)

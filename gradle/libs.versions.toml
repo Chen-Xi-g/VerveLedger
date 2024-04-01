@@ -25,6 +25,9 @@ mmkv = "1.3.0"
 lottie = "6.4.0"
 autoSize = "v1.2.1"
 splashScreen = "1.0.1"
+refresh = "2.1.0"
+map = "10.0.600"
+map-search = "9.7.0"
 domainUrlMain = "http://griffin.ledger.api.minlukj.com"
 
 [libraries]
@@ -57,6 +60,12 @@ mmkv = { group = "com.tencent", name = "mmkv", version.ref = "mmkv" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
 autoSize = { group = "com.github.JessYanCoding", name = "AndroidAutoSize", version.ref = "autoSize" }
 splash-screen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashScreen" }
+refresh = { group = "io.github.scwang90", name = "refresh-layout-kernel", version.ref= "refresh" }
+refresh-header = { group = "io.github.scwang90", name = "refresh-header-classics", version.ref= "refresh" }
+refresh-header-material = { group = "io.github.scwang90", name = "refresh-header-material", version.ref= "refresh" }
+refresh-footer = { group = "io.github.scwang90", name = "refresh-footer-classics", version.ref= "refresh" }
+map = { group = "com.amap.api", name = "3dmap", version.ref = "map" }
+map-search = { group = "com.amap.api", name = "search", version.ref = "map-search" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

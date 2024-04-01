@@ -39,8 +39,8 @@ abstract class HiltBaseFragment<DB : ViewDataBinding>(@LayoutRes val layoutResId
     /**
      * 泛型中的ViewBinding实例
      */
-    private lateinit var _binding: DB
-    val binding get() = _binding
+    private var _binding: DB? = null
+    val binding get() = _binding!!
 
     /**
      * 获取泛型中的ViewModel实例
@@ -83,11 +83,11 @@ abstract class HiltBaseFragment<DB : ViewDataBinding>(@LayoutRes val layoutResId
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        registerObserver()
         initClick()
         _rootBinding.baseLoadingLayout.root.showAnim()
         initView(view, savedInstanceState)
         obtainData()
+        registerObserver()
     }
 
     private fun createViewWithBinding(
@@ -95,7 +95,7 @@ abstract class HiltBaseFragment<DB : ViewDataBinding>(@LayoutRes val layoutResId
         container: ViewGroup?
     ): View {
         _rootBinding = DataBindingUtil.inflate(inflater, R.layout.base_root_layout, container, false)
-        _rootBinding.lifecycleOwner = this
+        _rootBinding.lifecycleOwner = viewLifecycleOwner
         if (showTitleBar()) {
             _rootBinding.baseTitleLayout.root.visible()
         } else {
@@ -108,7 +108,7 @@ abstract class HiltBaseFragment<DB : ViewDataBinding>(@LayoutRes val layoutResId
     private fun initContent() {
         _rootBinding.baseContentLayout.removeAllViews()
         _binding = DataBindingUtil.inflate(layoutInflater, layoutResId, _rootBinding.baseContentLayout, true)
-        _binding.lifecycleOwner = this
+        _binding?.lifecycleOwner = viewLifecycleOwner
     }
 
     private fun initClick() {
@@ -307,6 +307,11 @@ abstract class HiltBaseFragment<DB : ViewDataBinding>(@LayoutRes val layoutResId
             v.setPadding(0, systemBars.top, 0, 0)
             insets
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

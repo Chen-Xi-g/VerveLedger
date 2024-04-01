@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.griffin.core.data"
+    namespace = "com.griffin.core.router"
 }
 
 dependencies {

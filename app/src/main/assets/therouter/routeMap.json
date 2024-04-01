@@ -5,5 +5,40 @@
     "action": "",
     "description": "",
     "params": {}
+  },
+  {
+    "path": "/type/TypeActivity",
+    "className": "com.griffin.feature.type.component.TypeActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "/map/MapActivity",
+    "className": "com.griffin.feature.map.component.MapActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "/login/LoginMainActivity",
+    "className": "com.griffin.feature.login.component.LoginActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "/login/LoginActivity",
+    "className": "com.griffin.feature.login.component.LoginActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "/account/AccountActivity",
+    "className": "com.griffin.feature.account.component.account.AccountActivity",
+    "action": "",
+    "description": "",
+    "params": {}
   }
 ]

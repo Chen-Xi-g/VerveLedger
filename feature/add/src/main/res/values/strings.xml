@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_str_income">收入</string>
+    <string name="add_str_expenses">支出</string>
+    <string name="add_str_bill_name">账单名称</string>
+    <string name="add_str_bill_name_hint">请输入账单名称（必填）</string>
+    <string name="add_str_bill_type">账单类型</string>
+    <string name="add_str_bill_type_hint">请先选择分类（必选）</string>
+    <string name="add_str_classify">分类</string>
+    <string name="add_str_classify_hint">请选择分类（必选）</string>
+    <string name="add_str_amount">金额</string>
+    <string name="add_str_amount_hint">请输入金额（必须输入）</string>
+    <string name="add_str_account">账户</string>
+    <string name="add_str_account_hint">请选择账户（可选）</string>
+    <string name="add_str_address">地点</string>
+    <string name="add_str_address_hint">请选择地点（可选）</string>
+    <string name="add_str_remark">备注</string>
+    <string name="add_str_remark_hint">请输入备注（可选）</string>
+    <string name="add_str_add_bill">新增账单</string>
+    <string name="add_str_detail_bill">账单详情</string>
+    <string name="add_str_update_bill">修改账单</string>
+    <string name="add_str_save_bill">保存账单</string>
+</resources>

@@ -1,6 +1,5 @@
 plugins {
     id("griffin.feature")
-    alias(libs.plugins.jetbrains.kotlin.android)
 }
 
 android {

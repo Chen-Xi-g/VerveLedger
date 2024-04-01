@@ -5,6 +5,12 @@
 
     <data>
 
+        <import type="com.griffin.core.utils.StringUtilsKt" />
+        <import type="com.griffin.core.utils.TimeUtils"/>
+
+        <variable
+            name="item"
+            type="com.griffin.core.data.model.BillModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,6 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
+            android:text="@{TimeUtils.INSTANCE.toFriendlyTime(item.createTime, TimeUtils.FORMAT_YYYY_MM_DD)}"
             android:textColor="@color/color_text_hint"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +48,7 @@
             android:ellipsize="end"
             android:gravity="end"
             android:maxLines="1"
+            android:text="@{`收入：` + StringUtilsKt.f2yLast(item.income)}"
             android:textColor="@color/color_text_hint"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@id/tv_expenses"
@@ -56,6 +64,7 @@
             android:ellipsize="end"
             android:gravity="end"
             android:maxLines="1"
+            android:text="@{`支出：` + StringUtilsKt.f2yLast(item.expenses)}"
             android:textColor="@color/color_text_hint"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/tv_date"
@@ -63,15 +72,6 @@
             app:layout_constraintStart_toStartOf="@id/tv_income"
             app:layout_constraintTop_toBottomOf="@id/tv_income"
             tools:text="支出：100.00￥" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:background="@drawable/home_bg_rv"
-            app:layout_constraintTop_toBottomOf="@id/tv_date"
-            tools:itemCount="3"
-            tools:listitem="@layout/adapter_home_bill_detail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

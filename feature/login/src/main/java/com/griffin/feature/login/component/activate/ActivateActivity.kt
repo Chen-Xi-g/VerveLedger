@@ -28,6 +28,7 @@ class ActivateActivity : HiltBaseActivity<ActivityActivateBinding>(R.layout.acti
      * 初始化View
      */
     override fun initView(savedInstanceState: Bundle?) {
+        binding.vm = viewModel
         binding.vPadding.statusHeight()
         rootBinding.baseTitleLayout.root.gone()
         showContent()
@@ -57,12 +58,6 @@ class ActivateActivity : HiltBaseActivity<ActivityActivateBinding>(R.layout.acti
         binding.ibBack.setOnClickListener {
             finish()
         }
-        binding.ivCodeContent.setOnClickListener {
-            refreshCode()
-        }
-        binding.tvForgetPassword.setOnClickListener {
-            activate()
-        }
         successDialog.setOnDismissListener {
             finish()
         }
@@ -78,16 +73,7 @@ class ActivateActivity : HiltBaseActivity<ActivityActivateBinding>(R.layout.acti
     }
 
     private fun refreshCode() {
-        viewModel.getCaptchaImage()
-    }
-
-    private fun activate(){
-        val username = binding.etUsername.text.toString()
-        val code = binding.etCode.text.toString()
-        viewModel.activate(
-            username = username,
-            code = code
-        )
+        viewModel.refreshCode()
     }
 
 }

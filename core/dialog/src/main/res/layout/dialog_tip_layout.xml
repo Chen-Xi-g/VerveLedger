@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/dialog_tip_animation"
+        android:layout_width="166dp"
+        android:layout_height="166dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/ic_anim_dialog_tip" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dialog_tip_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:gravity="center"
+        android:textColor="@color/dialog_title"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_tip_animation"
+        tools:text="提示" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:id="@+id/dialog_tip_desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@color/dialog_desc"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_tip_text"
+        tools:text="操作成功，请前往进行下一步" />
+
+    <View
+        android:id="@+id/v_line_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/dialog_line"
+        app:layout_constraintTop_toBottomOf="@id/dialog_tip_desc" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dialog_tip_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingVertical="20dp"
+        android:textColor="@color/dialog_btn_success"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/v_line_bottom"
+        android:text="@string/dialog_confirm"
+        tools:text="知道了" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

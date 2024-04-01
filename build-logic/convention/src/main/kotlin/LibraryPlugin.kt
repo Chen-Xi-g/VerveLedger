@@ -21,9 +21,9 @@ class LibraryPlugin : Plugin<Project>{
             // 插件管理器
             with(pluginManager){
                 apply(libs.getPlugin("android-library"))
-                apply(libs.getPlugin("android-kotlin-ksp"))
                 apply(libs.getPlugin("jetbrains-kotlin-android"))
                 apply(libs.getPlugin("jetbrains-kotlin-serialization"))
+                apply(libs.getPlugin("android-kotlin-ksp"))
             }
 
             extensions.configure<LibraryExtension>{

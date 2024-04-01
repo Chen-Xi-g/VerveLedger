@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.griffin.feature.add.component.AddViewModel" />
+
+        <variable
+            name="isEnable"
+            type="Boolean" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_surface">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="120dp"
+                android:orientation="vertical"
+                app:divider="@color/color_line"
+                app:showDividers="middle">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_bill_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/add_str_bill_name"
+                        android:textColor="@color/color_text_submit"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:enabled="@{isEnable}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center_vertical|end"
+                        android:hint="@string/add_str_bill_name_hint"
+                        android:paddingVertical="13dp"
+                        android:text="@={vm.uiState.billName}"
+                        android:textColor="@color/color_onSurface"
+                        android:textColorHint="@color/color_text_hint"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="10dp"
+                        android:src="@drawable/base_ic_arrow_right"
+                        android:tint="@color/color_text_hint"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_bill_type_tag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/add_str_bill_type"
+                        android:textColor="@color/color_text_submit"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|end"
+                        android:hint="@string/add_str_bill_type_hint"
+                        android:paddingVertical="13dp"
+                        android:text="@{vm.uiState.isIncome ? @string/add_str_income : @string/add_str_expenses}"
+                        android:textColor="@color/color_onSurface"
+                        android:textColorHint="@color/color_text_hint"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="10dp"
+                        android:src="@drawable/base_ic_arrow_right"
+                        android:tint="@color/color_text_hint"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:enabled="@{isEnable}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:onClick="@{() -> vm.onClick(vm.START_BILL_TYPE)}"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_bill_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/add_str_classify"
+                        android:textColor="@color/color_text_submit"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|end"
+                        android:hint="@string/add_str_classify_hint"
+                        android:paddingVertical="13dp"
+                        android:text="@{vm.uiState.userPayTypeDto.typeName}"
+                        android:textColor="@color/color_onSurface"
+                        android:textColorHint="@color/color_text_hint"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="10dp"
+                        android:src="@drawable/base_ic_arrow_right"
+                        android:tint="@color/color_text_hint" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_bill_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/add_str_amount"
+                        android:textColor="@color/color_text_submit"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/et_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center_vertical|end"
+                        android:hint="@string/add_str_amount_hint"
+                        android:paddingVertical="13dp"
+                        android:text="@={vm.amount}"
+                        android:inputType="numberDecimal"
+                        android:textColor="@color/color_onSurface"
+                        android:textColorHint="@color/color_text_hint"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="10dp"
+                        android:src="@drawable/base_ic_arrow_right"
+                        android:tint="@color/color_text_hint"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:enabled="@{isEnable}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:onClick="@{() -> vm.onClick(vm.START_BILL_ACCOUNT)}"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/add_str_account"
+                        android:textColor="@color/color_text_submit"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|end"
+                        android:hint="@string/add_str_account_hint"
+                        android:paddingVertical="13dp"
+                        android:text="@{vm.uiState.userAccountDto.cardName}"
+                        android:textColor="@color/color_onSurface"
+                        android:textColorHint="@color/color_text_hint"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="10dp"
+                        android:src="@drawable/base_ic_arrow_right"
+                        android:tint="@color/color_text_hint" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:enabled="@{isEnable}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:onClick="@{() -> vm.onClick(vm.START_BILL_ADDRESS)}"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/add_str_address"
+                        android:textColor="@color/color_text_submit"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|end"
+                        android:hint="@string/add_str_address_hint"
+                        android:paddingVertical="13dp"
+                        android:text="@{vm.uiState.address}"
+                        android:textColor="@color/color_onSurface"
+                        android:textColorHint="@color/color_text_hint"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="10dp"
+                        android:src="@drawable/base_ic_arrow_right"
+                        android:tint="@color/color_text_hint" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_remark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:text="@string/add_str_remark"
+                        android:textColor="@color/color_text_submit"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:enabled="@{isEnable}"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center_vertical|end"
+                        android:hint="@string/add_str_remark_hint"
+                        android:paddingVertical="13dp"
+                        android:text="@={vm.uiState.remark}"
+                        android:textColor="@color/color_onSurface"
+                        android:textColorHint="@color/color_text_hint"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="10dp"
+                        android:src="@drawable/base_ic_arrow_right"
+                        android:tint="@color/color_text_hint"
+                        android:visibility="invisible" />
+                </LinearLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:onClick="@{() -> vm.submit()}"
+            android:id="@+id/tv_submit"
+            style="@style/roundClick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginBottom="60dp"
+            android:text="@string/add_str_save_bill" />
+    </FrameLayout>
+
+</layout>

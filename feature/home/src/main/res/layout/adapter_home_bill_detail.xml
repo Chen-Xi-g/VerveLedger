@@ -1,71 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="15dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_cover"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_title"
-        android:layout_width="0dp"
+        <import type="com.griffin.core.utils.StringUtilsKt" />
+
+        <import type="com.griffin.core.utils.TimeUtils"/>
+
+        <variable
+            name="item"
+            type="com.griffin.core.data.model.BillListModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginVertical="5dp"
+        android:layout_marginHorizontal="15dp"
+        android:background="@drawable/home_bg_bill_list"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="10dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textColor="@color/color_onSurface"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/tv_remark"
-        app:layout_constraintEnd_toStartOf="@id/tv_amount"
-        app:layout_constraintStart_toEndOf="@id/iv_cover"
-        app:layout_constraintTop_toTopOf="@id/iv_cover"
-        tools:text="餐饮" />
+        android:padding="15dp">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/color_onSurface"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/tv_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_title"
-        tools:text="-100.12￥" />
+        <FrameLayout
+            android:id="@+id/fl_type"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/color_text_hint"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/tv_remark"
-        app:layout_constraintEnd_toEndOf="@id/tv_amount"
-        app:layout_constraintTop_toTopOf="@id/tv_remark"
-        tools:text="17:00" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/home_bg_logo"
+                app:shapeAppearanceOverlay="@style/roundCornerImage4" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        tools:text="备注信息"
-        android:id="@+id/tv_remark"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textColor="@color/color_text_hint"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/iv_cover"
-        app:layout_constraintEnd_toStartOf="@id/tv_date"
-        app:layout_constraintStart_toStartOf="@id/tv_title"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:text="@{item.userPayTypeDto.typeName}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="5dp"
+                android:gravity="center"
+                android:maxEms="2"
+                android:maxLines="2"
+                tools:text="餐饮餐餐饮餐"
+                android:textColor="@color/color_surface"
+                android:textSize="12sp" />
+        </FrameLayout>
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:text="@{item.billName}"
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/color_onSurface"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_remark"
+            app:layout_constraintEnd_toStartOf="@id/tv_amount"
+            app:layout_constraintStart_toEndOf="@id/fl_type"
+            app:layout_constraintTop_toTopOf="@id/fl_type"
+            tools:text="早餐" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:text="@{(item.income ? `+` : `-`) + StringUtilsKt.f2yLast(item.billAmount)}"
+            android:id="@+id/tv_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@{item.income ? @color/color_home_income_bg : @color/color_home_expenses_bg}"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/tv_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_title"
+            tools:text="-100.12￥"
+            tools:textColor="@color/color_home_expenses_bg"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:text="@{TimeUtils.INSTANCE.toFormatTime(item.createTime, TimeUtils.FORMAT_YYYY_MM_DD_HH_MM_SS, TimeUtils.FORMAT_HH_MM)}"
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_text_hint"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_remark"
+            app:layout_constraintEnd_toEndOf="@id/tv_amount"
+            app:layout_constraintTop_toTopOf="@id/tv_remark"
+            tools:text="17:00" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:text="@{item.remark}"
+            android:id="@+id/tv_remark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/color_text_hint"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/fl_type"
+            app:layout_constraintEnd_toStartOf="@id/tv_date"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:text="备注信息" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,5 +1,6 @@
 package com.griffin.core.network.interceptor
 
+import com.google.gson.Gson
 import com.griffin.core.router.RoutePath
 import com.griffin.core.utils.mmkv.BaseMV
 import com.therouter.TheRouter
@@ -17,7 +18,8 @@ class ResponseInterceptor : Interceptor {
         if (proceed.body != null) {
             // 拦截响应体，获取code和Message判断Token是否过期
             val json = proceed.body?.string() ?: ""
-            if (json.contains("需要登录")) {
+            val fromJson = Gson().fromJson(json, HashMap::class.java)
+            if (proceed.code == 401 || (fromJson.get("code").toString().toDoubleOrNull() ?: 0.0) == 401.0) {
                 BaseMV.User.clearAll()
                 TheRouter.build(RoutePath.Login.LOGIN)
                     .navigation()

@@ -21,6 +21,7 @@ class RegisterActivity : HiltBaseActivity<ActivityRegisterBinding>(R.layout.acti
     override val viewModel: RegisterViewModel by viewModels()
 
     override fun initView(savedInstanceState: Bundle?) {
+        binding.vm = viewModel
         binding.vPadding.statusHeight()
         rootBinding.baseTitleLayout.root.gone()
         showContent()
@@ -48,12 +49,6 @@ class RegisterActivity : HiltBaseActivity<ActivityRegisterBinding>(R.layout.acti
         binding.ibBack.setOnClickListener {
             finish()
         }
-        binding.ivCodeContent.setOnClickListener {
-            refreshCode()
-        }
-        binding.tvRegister.setOnClickListener {
-            register()
-        }
         errorDialog.setOnDismissListener {
             refreshCode()
         }
@@ -66,25 +61,7 @@ class RegisterActivity : HiltBaseActivity<ActivityRegisterBinding>(R.layout.acti
      * 刷新验证码
      */
     private fun refreshCode(){
-        viewModel.getCaptchaImage()
-    }
-
-    /**
-     * 注册
-     */
-    private fun register() {
-        val username = binding.etUsername.text.toString()
-        val email = binding.etEmail.text.toString()
-        val password = binding.etPassword.text.toString()
-        val confirmPassword = binding.etConfirmPassword.text.toString()
-        val code = binding.etCode.text.toString()
-        viewModel.register(
-            code = code,
-            email = email,
-            password = password,
-            confirmPassword = confirmPassword,
-            username = username
-        )
+        viewModel.refreshCode()
     }
 
 }

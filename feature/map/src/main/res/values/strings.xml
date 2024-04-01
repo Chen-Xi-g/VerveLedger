@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="map_key">b5c9ab26f712df7a5b845d90727b2900</string>
+    <string name="map_permission_needed">需要授予火记定位权限，以便于正常使用地图功能。</string>
+    <string name="map_permission_needed_setting">需要授予火记定位权限，请到设置中允许获取定位权限。</string>
+    <string name="map_search_address_hint">请输入定位名称</string>
+    <string name="map_select_location">使用此位置</string>
+</resources>

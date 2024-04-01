@@ -19,5 +19,5 @@ dependencies {
     implementation(libs.kotlin.coroutines)
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lottie)
-    implementation(libs.autoSize)
+    api(libs.autoSize)
 }

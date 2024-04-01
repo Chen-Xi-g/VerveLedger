@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="base_str_yuan">￥%1$s</string>
+    <string name="base_str_first_yuan">¥%1$s</string>
+    <string name="base_str_last_yuan">%1$s¥</string>
 </resources>

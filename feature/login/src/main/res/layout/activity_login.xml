@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="vm"
+            type="com.griffin.feature.login.component.LoginViewModel" />
     </data>
 
     <RelativeLayout
@@ -101,6 +104,7 @@
                         android:maxLength="24"
                         android:maxLines="1"
                         android:paddingVertical="10dp"
+                        android:text="@={vm.uiState.username}"
                         android:textColor="@color/color_onSurface"
                         android:textColorHint="@color/color_text_hint"
                         android:textSize="14sp"
@@ -140,6 +144,7 @@
                         android:maxLength="24"
                         android:maxLines="1"
                         android:paddingVertical="10dp"
+                        android:text="@={vm.uiState.password}"
                         android:textColor="@color/color_onSurface"
                         android:textColorHint="@color/color_text_hint"
                         android:textSize="14sp"
@@ -191,6 +196,7 @@
                         android:maxLength="5"
                         android:maxLines="1"
                         android:paddingVertical="10dp"
+                        android:text="@={vm.uiState.code}"
                         android:textColor="@color/color_onSurface"
                         android:textColorHint="@color/color_text_hint"
                         android:textSize="14sp"
@@ -203,6 +209,7 @@
                         android:id="@+id/iv_code_content"
                         android:layout_width="114dp"
                         android:layout_height="0dp"
+                        android:onClick="@{() -> vm.refreshCode()}"
                         android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="@id/et_code"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -239,6 +246,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="63dp"
+                    android:onClick="@{() -> vm.loginClick()}"
                     android:text="@string/login_str_login"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

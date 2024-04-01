@@ -2,6 +2,7 @@ package com.griffin.feature.login.component
 
 import com.griffin.core.base.vm.BaseViewModel
 import com.griffin.core.data.model.CaptchaImageModel
+import com.griffin.core.data.model.state.LoginState
 import com.griffin.core.domain.use_case.validation.user.ValidationCode
 import com.griffin.core.domain.use_case.validation.user.ValidationPassword
 import com.griffin.core.domain.use_case.validation.user.ValidationResult
@@ -29,6 +30,11 @@ class LoginViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     /**
+     * 页面状态
+     */
+    val uiState = MutableStateFlow(LoginState())
+
+    /**
      * 图片验证码
      */
     private val _captchaImage = MutableStateFlow(CaptchaImageModel())
@@ -48,16 +54,16 @@ class LoginViewModel @Inject constructor(
     /**
      * 获取图形验证码
      */
-    fun getCaptchaImage() {
+    private fun getCaptchaImage() {
         handleRequest({ commonDataSource.captchaImage() }, isLoadingDialog = null) {
             _captchaImage.value = it.`data` ?: CaptchaImageModel()
         }
     }
 
     /**
-     * 登录账户
+     * 登录
      */
-    fun login(username: String, password: String, code: String) {
+    private fun login(username: String, password: String, code: String) {
         val usernameResult = validationUsername.execute(username)
         val passwordResult = validationPassword.execute(password)
         val codeResult = validationCode.execute(code)
@@ -90,6 +96,20 @@ class LoginViewModel @Inject constructor(
                 _loginState.emit(true)
             }
         }
+    }
+
+    /**
+     * 登录账户
+     */
+    fun loginClick() {
+        login(uiState.value.username, uiState.value.password, uiState.value.code)
+    }
+
+    /**
+     * 刷新验证码
+     */
+    fun refreshCode() {
+        getCaptchaImage()
     }
 
 }

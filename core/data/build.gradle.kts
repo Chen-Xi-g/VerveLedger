@@ -7,5 +7,6 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:rv"))
     implementation(libs.kotlin.serialization)
 }

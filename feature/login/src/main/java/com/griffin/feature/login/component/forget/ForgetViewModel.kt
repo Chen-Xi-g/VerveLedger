@@ -2,6 +2,7 @@ package com.griffin.feature.login.component.forget
 
 import com.griffin.core.base.vm.BaseViewModel
 import com.griffin.core.data.model.CaptchaImageModel
+import com.griffin.core.data.model.state.LoginState
 import com.griffin.core.domain.use_case.validation.user.ValidationCode
 import com.griffin.core.domain.use_case.validation.user.ValidationPassword
 import com.griffin.core.domain.use_case.validation.user.ValidationUsername
@@ -28,6 +29,11 @@ class ForgetViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     /**
+     * 页面状态
+     */
+    val uiState = MutableStateFlow(LoginState())
+
+    /**
      * 图片验证码
      */
     private val _captchaImage = MutableStateFlow(CaptchaImageModel())
@@ -36,7 +42,7 @@ class ForgetViewModel @Inject constructor(
     /**
      * 获取图形验证码
      */
-    fun getCaptchaImage() {
+    private fun getCaptchaImage() {
         handleRequest({ commonDataSource.captchaImage() }, isLoadingDialog = null) {
             _captchaImage.value = it.data ?: CaptchaImageModel()
         }
@@ -45,7 +51,7 @@ class ForgetViewModel @Inject constructor(
     /**
      * 找回密码
      */
-    fun forgetPwd(username: String, password: String, confirmPassword: String, code: String) {
+    private fun forgetPwd(username: String, password: String, confirmPassword: String, code: String) {
         val usernameResult = validationUsername.execute(username)
         val passwordResult = validationPassword.execute(password)
         val confirmPasswordResult = validationPassword.execute(password, confirmPassword)
@@ -77,6 +83,14 @@ class ForgetViewModel @Inject constructor(
         ) {
             success(it.message, isDialog = true)
         }
+    }
+
+    fun forgetPwdClick() {
+        forgetPwd(uiState.value.username, uiState.value.password, uiState.value.confirmPassword, uiState.value.code)
+    }
+
+    fun refreshCode() {
+        getCaptchaImage()
     }
 
 }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.griffin.core.data.model.TypeModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/type_bg_item"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="15dp">
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cb_select"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:button="@null"
+            android:checked="@{item.selected}"
+            android:clickable="false"
+            android:drawableStart="@drawable/base_btn_check"
+            android:drawableTint="@color/color_primary"
+            android:enabled="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:text="@{item.typeName}"
+            android:textColor="@color/color_onSurface"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/cb_select"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cb_select"
+            app:layout_constraintTop_toTopOf="@id/cb_select"
+            tools:text="选择项1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

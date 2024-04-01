@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/rb_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/rb_expenses"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:gravity="center"
+                android:id="@+id/rb_expenses"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:background="@drawable/type_bg_radio_left"
+                android:button="@null"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="7dp"
+                android:text="@string/type_str_expenses"
+                android:textColor="@drawable/type_color_radio" />
+
+            <RadioButton
+                android:gravity="center"
+                android:id="@+id/rb_income"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:background="@drawable/type_bg_radio_right"
+                android:button="@null"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="7dp"
+                android:text="@string/type_str_income"
+                android:textColor="@drawable/type_color_radio" />
+        </RadioGroup>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:layout_marginTop="8dp"
+            android:id="@+id/vp_type"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rb_group" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_confirm"
+            android:text="@string/dialog_confirm"
+            style="@style/roundClick"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginBottom="65dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -20,6 +20,10 @@ dependencies {
     implementation(project(":core:utils"))
     implementation(project(":feature:login"))
     implementation(project(":feature:home"))
+    implementation(project(":feature:add"))
+    implementation(project(":feature:account"))
+    implementation(project(":feature:map"))
+    implementation(project(":feature:type"))
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.splash.screen)
 }

@@ -2,6 +2,7 @@ package com.griffin.feature.login.component.activate
 
 import com.griffin.core.base.vm.BaseViewModel
 import com.griffin.core.data.model.CaptchaImageModel
+import com.griffin.core.data.model.state.LoginState
 import com.griffin.core.domain.use_case.validation.user.ValidationCode
 import com.griffin.core.domain.use_case.validation.user.ValidationPassword
 import com.griffin.core.domain.use_case.validation.user.ValidationUsername
@@ -22,6 +23,11 @@ class ActivateViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     /**
+     * 页面状态
+     */
+    val uiState = MutableStateFlow(LoginState())
+
+    /**
      * 图片验证码
      */
     private val _captchaImage = MutableStateFlow(CaptchaImageModel())
@@ -30,7 +36,7 @@ class ActivateViewModel @Inject constructor(
     /**
      * 获取图形验证码
      */
-    fun getCaptchaImage() {
+    private fun getCaptchaImage() {
         handleRequest({ commonDataSource.captchaImage() }, isLoadingDialog = null) {
             _captchaImage.value = it.data ?: CaptchaImageModel()
         }
@@ -39,7 +45,7 @@ class ActivateViewModel @Inject constructor(
     /**
      * 找回密码
      */
-    fun activate(username: String, code: String) {
+    private fun activate(username: String, code: String) {
         val usernameResult = validationUsername.execute(username)
         val codeResult = validationCode.execute(code)
         val errorList = listOf(
@@ -65,5 +71,13 @@ class ActivateViewModel @Inject constructor(
         ) {
             success(it.message, isDialog = true)
         }
+    }
+
+    fun refreshCode() {
+        getCaptchaImage()
+    }
+
+    fun activateClick() {
+        activate(uiState.value.username, uiState.value.code)
     }
 }

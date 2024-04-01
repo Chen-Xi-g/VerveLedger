@@ -4,6 +4,7 @@
     <color name="color_onBackground">#FFFFFF</color>
     <color name="color_surface">#000000</color>
     <color name="color_onSurface">#FFFFFF</color>
+    <color name="color_text_submit">#DDDDDD</color>
     <color name="color_hint">#F0F0F0</color>
     <color name="color_text_hint">#666E82</color>
     <color name="color_error">#F2B8B5</color>
@@ -14,4 +15,6 @@
     <color name="color_line">#B9B8D2</color>
     <color name="color_home_income_bg">#009688</color>
     <color name="color_home_expenses_bg">#C2185B</color>
+    <color name="color_wx">#8055C4A1</color>
+    <color name="color_alipay">#804781EC</color>
 </resources>

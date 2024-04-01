@@ -10,12 +10,12 @@
 
 **Gradle约定插件目录**
 
-![build-logic](/images/file_build-logic.png)
+[build-logic](/build-logic/README.md)
 
 **核心模块**
 
-![core](/images/file_core.png)
+[core](/core/README.md)
 
 **功能模块**
 
-![feature](/images/file_feature.png)
+[feature](/feature/README.md)
