@@ -11,17 +11,20 @@ import com.griffin.core.base.fragment.HiltBaseFragment
 import com.griffin.core.base.vm.BaseViewModel
 import com.griffin.core.data.model.BillListModel
 import com.griffin.core.data.model.BillModel
+import com.griffin.core.router.RoutePath
 import com.griffin.core.rv.addData
 import com.griffin.core.rv.linear
 import com.griffin.core.rv.setData
 import com.griffin.core.rv.setup
 import com.griffin.core.utils.LogUtils
 import com.griffin.core.utils.f2y
+import com.griffin.core.utils.router
 import com.griffin.core.utils.statusHeight
 import com.griffin.feature.home.R
 import com.griffin.feature.home.databinding.AdapterHomeBillBinding
 import com.griffin.feature.home.databinding.AdapterHomeBillDetailBinding
 import com.griffin.feature.home.databinding.FragmentHomeBinding
+import com.therouter.TheRouter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -93,6 +96,10 @@ class HomeFragment : HiltBaseFragment<FragmentHomeBinding>(R.layout.fragment_hom
                         }
                         is BillListModel ->{
                             // 子布局点击事件
+                            RoutePath.Add.BILL.router {
+                                putInt("type", 2)
+                                putLong("id", type.billId)
+                            }
                         }
                     }
                 }

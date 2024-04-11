@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="detail"
+            type="com.griffin.core.data.model.BillListModel" />
+
+        <import type="android.view.View" />
+
+        <import type="android.text.TextUtils" />
+
+        <import type="com.griffin.core.utils.StringUtilsKt" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.amap.api.maps.MapView
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinatorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <FrameLayout
+                android:id="@+id/bottom_sheet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:behavior_hideable="true"
+                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="40dp"
+                    android:background="@drawable/map_shape_search_bottom_sheet"
+                    android:elevation="4dp"
+                    android:paddingBottom="40dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_close"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="10dp"
+                        android:src="@drawable/map_ic_close"
+                        android:tint="@color/color_text_hint"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:gravity="center"
+                        android:text="@{detail.billName}"
+                        android:textColor="@color/color_onSurface"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_close"
+                        tools:text="李村公园" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_classify"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        app:layout_constraintTop_toBottomOf="@id/tv_title">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/map_str_classify"
+                            android:textColor="@color/color_onSurface"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="@{detail.userPayTypeDto.typeName}"
+                            android:textColor="@color/color_text_hint"
+                            android:textSize="14sp"
+                            tools:text="游戏" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        app:layout_constraintTop_toBottomOf="@id/ll_classify">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/map_str_date"
+                            android:textColor="@color/color_onSurface"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="@{detail.createTime}"
+                            android:textColor="@color/color_text_hint"
+                            android:textSize="14sp"
+                            tools:text="2023-01-01" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        app:layout_constraintTop_toBottomOf="@id/ll_date">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/map_str_amount"
+                            android:textColor="@color/color_onSurface"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="@{(TextUtils.equals(`0`, detail.userPayTypeDto.typeTag) ? `-` : `+`) + StringUtilsKt.f2yLast(detail.billAmount)}"
+                            android:textColor="@color/color_text_hint"
+                            android:textSize="14sp"
+                            tools:text="-100.12￥" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="40dp"
+                        android:gravity="center_vertical"
+                        android:visibility="@{TextUtils.isEmpty(detail.address) ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintTop_toBottomOf="@id/ll_amount">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/map_str_address"
+                            android:textColor="@color/color_onSurface"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="@{detail.address}"
+                            android:textColor="@color/color_text_hint"
+                            android:textSize="14sp"
+                            tools:text="山东省青岛市李沧区" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_remark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="40dp"
+                        android:gravity="center_vertical"
+                        android:visibility="@{TextUtils.isEmpty(detail.remark) ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintTop_toBottomOf="@id/ll_address">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/map_str_remark"
+                            android:textColor="@color/color_onSurface"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="@{detail.remark}"
+                            android:textColor="@color/color_text_hint"
+                            android:textSize="14sp"
+                            tools:text="我想要去干啥干啥" />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:background="@color/color_surface"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_menu"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/adapter_list_detail" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_menu"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:alpha="1"
+            android:background="@color/color_surface"
+            android:padding="10dp"
+            android:src="@drawable/map_ic_menu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

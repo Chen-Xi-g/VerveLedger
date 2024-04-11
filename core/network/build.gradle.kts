@@ -12,7 +12,7 @@ android {
             buildConfigField(
                 "String",
                 "SERVER_URL",
-                "\"${libs.versions.domainUrlMain.get()}\""
+                "\"${libs.versions.domainUrlMainDebug.get()}\""
             )
         }
         // release

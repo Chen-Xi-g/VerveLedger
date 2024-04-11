@@ -1,7 +1,10 @@
 package com.griffin.core.network.source.bill
 
 import com.griffin.core.data.dto.AddBillDto
+import com.griffin.core.data.dto.BillDetailDto
+import com.griffin.core.data.mappers.toBillListModelDetail
 import com.griffin.core.data.mappers.toBillModel
+import com.griffin.core.data.model.BillListModel
 import com.griffin.core.data.model.BillModel
 import com.griffin.core.data.model.Resource
 import com.griffin.core.data.model.toResource
@@ -56,6 +59,16 @@ class BillDataSourceImpl @Inject constructor(
                 )
             ).toResource()
         } catch (e: Exception) {
+            e.toNetError()
+        }
+    }
+
+    override suspend fun billDetail(id: Long): Resource<BillListModel> {
+        return try {
+            billApi.billDetail(id).toResource{
+                it.toBillListModelDetail()
+            }
+        }catch (e: Exception){
             e.toNetError()
         }
     }

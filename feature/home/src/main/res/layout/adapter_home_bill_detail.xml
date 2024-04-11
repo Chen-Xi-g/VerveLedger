@@ -94,7 +94,7 @@
             tools:text="17:00" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:text="@{item.remark}"
+            android:text="@{item.address}"
             android:id="@+id/tv_remark"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
             app:layout_constraintEnd_toStartOf="@id/tv_date"
             app:layout_constraintStart_toStartOf="@id/tv_title"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
-            tools:text="备注信息" />
+            tools:text="地址信息" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

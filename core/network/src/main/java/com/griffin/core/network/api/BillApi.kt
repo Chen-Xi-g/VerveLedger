@@ -3,6 +3,8 @@ package com.griffin.core.network.api
 import com.griffin.core.data.dto.AddBillDto
 import com.griffin.core.data.dto.BaseDto
 import com.griffin.core.data.dto.BillDetailDto
+import com.griffin.core.data.dto.BillListDto
+import com.griffin.core.data.model.BillListModel
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -38,4 +40,14 @@ interface BillApi{
         @Body bill: AddBillDto
     ): BaseDto<String>
 
+
+    /**
+     * 获取账单详情
+     *
+     * @param id 账单ID
+     */
+    @GET("billDetail")
+    suspend fun billDetail(
+        @Query("id") id: Long
+    ): BaseDto<BillListDto>
 }

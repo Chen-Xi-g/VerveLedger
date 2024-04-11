@@ -23,40 +23,16 @@ fun Long?.f2y(): String {
 }
 
 /**
- * 分转元
- */
-fun Int?.f2y(): String {
-    if (this == null || this == 0) {
-        return "0"
-    }
-    return BigDecimal.valueOf(this.toLong()).divide(BigDecimal(100)).toString()
-}
-
-/**
- * 分转元
+ * 分转元。在前面添加元
  */
 fun Long?.f2yFirst(): String {
     return f2y().addFirstYuan()
 }
 
 /**
- * 分转元
- */
-fun Int?.f2yFirst(): String {
-    return f2y().addFirstYuan()
-}
-
-/**
- * 分转元
+ * 分转元，在后面添加元
  */
 fun Long?.f2yLast(): String {
-    return f2y().addLastYuan()
-}
-
-/**
- * 分转元
- */
-fun Int?.f2yLast(): String {
     return f2y().addLastYuan()
 }
 

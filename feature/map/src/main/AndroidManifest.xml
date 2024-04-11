@@ -19,6 +19,11 @@
             android:exported="false"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".component.detail.MapDetailActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
         <meta-data android:name="com.amap.api.v2.apikey" android:value="b5c9ab26f712df7a5b845d90727b2900"/>
     </application>
 

@@ -14,6 +14,13 @@
     "params": {}
   },
   {
+    "path": "/map/MapDetailActivity",
+    "className": "com.griffin.feature.map.component.detail.MapDetailActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
     "path": "/map/MapActivity",
     "className": "com.griffin.feature.map.component.MapActivity",
     "action": "",
@@ -30,6 +37,13 @@
   {
     "path": "/login/LoginActivity",
     "className": "com.griffin.feature.login.component.LoginActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "/add/AddActivity",
+    "className": "com.griffin.feature.add.component.AddActivity",
     "action": "",
     "description": "",
     "params": {}

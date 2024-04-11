@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/map_ic_marker_bg"
+        android:paddingHorizontal="13dp"
+        android:paddingVertical="5dp"
+        android:textColor="@color/color_surface"
+        android:textSize="12sp"
+        tools:text="餐饮" />
+
+    <View
+        android:layout_marginTop="-1dp"
+        android:background="@drawable/map_ic_marker_triangle"
+        android:layout_width="10dp"
+        android:layout_height="10dp"/>
+</LinearLayout>

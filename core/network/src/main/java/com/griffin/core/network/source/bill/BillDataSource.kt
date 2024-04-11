@@ -2,6 +2,7 @@ package com.griffin.core.network.source.bill
 
 import com.griffin.core.data.dto.BaseDto
 import com.griffin.core.data.dto.BillDetailDto
+import com.griffin.core.data.model.BillListModel
 import com.griffin.core.data.model.BillModel
 import com.griffin.core.data.model.Resource
 
@@ -53,5 +54,12 @@ interface BillDataSource {
         remark: String = "",
         typeId: Long = 0
     ): Resource<String>
+
+    /**
+     * 账单详情
+     *
+     * @param id 账单ID
+     */
+    suspend fun billDetail(id: Long): Resource<BillListModel>
 
 }

@@ -29,7 +29,7 @@ data class AccountModel(
  * @property type 类型（00：电子账户，01：储蓄账户）
  */
 data class AccountListModel(
-    val balance: Int = 0,
+    val balance: Long = 0,
     val cardCode: String = "",
     val cardName: String = "",
     val id: Long = 0,

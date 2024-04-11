@@ -4,6 +4,8 @@ import androidx.lifecycle.viewModelScope
 import com.griffin.core.base.vm.BaseViewModel
 import com.griffin.core.data.model.BillModel
 import com.griffin.core.network.source.bill.BillDataSource
+import com.griffin.core.router.RoutePath
+import com.griffin.core.utils.router
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,17 +25,17 @@ class HomeViewModel @Inject constructor(
     /**
      * 本月收入
      */
-    val income = MutableStateFlow(0)
+    val income = MutableStateFlow(0L)
 
     /**
      * 本月支出
      */
-    val expenses = MutableStateFlow(0)
+    val expenses = MutableStateFlow(0L)
 
     /**
      * 剩余额度
      */
-    val surplus = MutableStateFlow(100000)
+    val surplus = MutableStateFlow(100000L)
 
     /**
      * 获取账单列表
@@ -61,6 +63,12 @@ class HomeViewModel @Inject constructor(
             }
             income.value = it.data?.sumOf { it.income } ?: 0
             expenses.value = it.data?.sumOf { it.expenses } ?: 0
+        }
+    }
+
+    fun onClickMap(){
+        RoutePath.Map.MAP_DETAIL.router {
+            putInt("type", 2)
         }
     }
 

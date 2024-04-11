@@ -10,6 +10,8 @@
     <string name="add_str_classify_hint">请选择分类（必选）</string>
     <string name="add_str_amount">金额</string>
     <string name="add_str_amount_hint">请输入金额（必须输入）</string>
+    <string name="add_str_date">日期</string>
+    <string name="add_str_date_hint">请选择日期（必选）</string>
     <string name="add_str_account">账户</string>
     <string name="add_str_account_hint">请选择账户（可选）</string>
     <string name="add_str_address">地点</string>

@@ -34,19 +34,30 @@ fun List<BillListDto>?.toBillListModel(): List<BillListModel>{
         return emptyList()
     }else{
         map { map ->
-            BillListModel(
-                billId = map.billId,
-                userPayTypeDto = map.userPayType,
-                userAccountDto = map.userAccount,
-                billName = map.billName,
-                billAmount = map.billAmount.toLong(),
-                isIncome = map.userPayType.isIncome(),
-                remark = map.remark,
-                createTime = map.createTime,
-                address = map.address,
-                longitude = map.longitude,
-                latitude = map.latitude
-            )
+            map.toBillListModelDetail()
         }
+    }
+}
+
+/**
+ * 账单详情转换为账单列表模型
+ */
+fun BillListDto?.toBillListModelDetail(): BillListModel {
+    return if (this == null){
+        BillListModel()
+    }else{
+        BillListModel(
+            billId = billId,
+            userPayTypeDto = userPayType,
+            userAccountDto = userAccount,
+            billName = billName,
+            billAmount = billAmount,
+            isIncome = userPayType.isIncome(),
+            remark = remark,
+            createTime = createTime,
+            address = address,
+            longitude = longitude,
+            latitude = latitude
+        )
     }
 }

@@ -23,5 +23,15 @@ object RoutePath {
 
     object Map {
         const val MAP = "/map/MapActivity"
+        const val MAP_DETAIL = "/map/MapDetailActivity"
+    }
+
+    object Add {
+
+        /**
+         * type 0：新增 1：修改 2：查看
+         * id 账单ID
+         */
+        const val BILL = "/add/AddActivity"
     }
 }

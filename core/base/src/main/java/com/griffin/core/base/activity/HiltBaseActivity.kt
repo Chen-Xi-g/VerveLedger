@@ -1,16 +1,17 @@
 package com.griffin.core.base.activity
 
+import android.animation.Animator
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.res.Resources
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowInsetsController
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import androidx.activity.SystemBarStyle
-import androidx.activity.enableEdgeToEdge
 import androidx.annotation.ColorRes
 import androidx.annotation.LayoutRes
 import androidx.core.view.ViewCompat
@@ -26,6 +27,7 @@ import com.griffin.core.base.dialog.LoadingDialog
 import com.griffin.core.base.vm.BaseViewModel
 import com.griffin.core.dialog.ErrorDialog
 import com.griffin.core.dialog.SuccessDialog
+import com.griffin.core.utils.isDarkTheme
 import com.griffin.core.utils.isVisible
 import com.griffin.core.utils.runMain
 import com.griffin.core.utils.toast
@@ -39,7 +41,8 @@ import me.jessyan.autosize.AutoSizeCompat
  *
  * @param DB DataBinding
  */
-abstract class HiltBaseActivity<DB: ViewDataBinding>(@LayoutRes val layoutResId: Int) : AbstractActivity(){
+abstract class HiltBaseActivity<DB : ViewDataBinding>(@LayoutRes val layoutResId: Int) :
+    AbstractActivity() {
 
     /**
      * 根布局
@@ -77,12 +80,10 @@ abstract class HiltBaseActivity<DB: ViewDataBinding>(@LayoutRes val layoutResId:
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge(navigationBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT))
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        WindowCompat.getInsetsController(window, window.decorView).apply {
-            isAppearanceLightNavigationBars = false
-        }
+        statusIconDark(!isDarkTheme())
+        navigationIconDark(!isDarkTheme())
         TheRouter.inject(this)
         lockOrientation(true)
         // 设置默认布局
@@ -99,15 +100,23 @@ abstract class HiltBaseActivity<DB: ViewDataBinding>(@LayoutRes val layoutResId:
 
     private fun initContent() {
         _rootBinding.baseContentLayout.removeAllViews()
-        _binding = DataBindingUtil.inflate(layoutInflater, layoutResId, _rootBinding.baseContentLayout, true)
+        _binding = DataBindingUtil.inflate(
+            layoutInflater,
+            layoutResId,
+            _rootBinding.baseContentLayout,
+            true
+        )
         _binding.lifecycleOwner = this
     }
 
-    private fun initClick(){
+    private fun initClick() {
         _rootBinding.baseErrorLayout.root.setOnClickListener {
-            if (_rootBinding.baseErrorLayout.root.isVisible()){
+            if (_rootBinding.baseErrorLayout.root.isVisible()) {
                 onRetry()
             }
+        }
+        _rootBinding.baseTitleLayout.baseBackButton.setOnClickListener {
+            finish()
         }
     }
 
@@ -123,15 +132,17 @@ abstract class HiltBaseActivity<DB: ViewDataBinding>(@LayoutRes val layoutResId:
                     is ViewState.ErrorLayout -> {
                         onError(it.msg, it.isToast, false, it.code)
                     }
+
                     is ViewState.ErrorDialog -> {
                         onError(it.msg, it.isToast, true, it.code)
                     }
+
                     is ViewState.LoadingDialog -> showLoadingDialog(it.msg)
                     is ViewState.LoadingLayout -> showLoading(it.msg)
                     is ViewState.Success -> {
-                        if (it.isToast){
+                        if (it.isToast) {
                             successDialog(msg = it.msg)
-                        }else{
+                        } else {
                             showContent()
                         }
                     }
@@ -157,7 +168,7 @@ abstract class HiltBaseActivity<DB: ViewDataBinding>(@LayoutRes val layoutResId:
      * 显示加载中布局
      */
     fun showLoading(msg: String? = null) {
-        if (!msg.isNullOrEmpty()){
+        if (!msg.isNullOrEmpty()) {
             _rootBinding.baseLoadingLayout.baseLoadingText.text = msg
         }
         errorDialog.dismiss()
@@ -177,7 +188,7 @@ abstract class HiltBaseActivity<DB: ViewDataBinding>(@LayoutRes val layoutResId:
     fun showLoadingDialog(msg: String? = null) {
         successDialog.dismiss()
         errorDialog.dismiss()
-        if (!msg.isNullOrEmpty()){
+        if (!msg.isNullOrEmpty()) {
             loadingDialog.updateText(msg)
         }
         loadingDialog.show()
@@ -189,7 +200,7 @@ abstract class HiltBaseActivity<DB: ViewDataBinding>(@LayoutRes val layoutResId:
      * @param msg 提示信息
      */
     fun showEmpty(msg: String? = null) {
-        if (!msg.isNullOrEmpty()){
+        if (!msg.isNullOrEmpty()) {
             _rootBinding.baseEmptyLayout.baseEmptyText.text = msg
         }
         loadingDialog.dismiss()
@@ -223,7 +234,7 @@ abstract class HiltBaseActivity<DB: ViewDataBinding>(@LayoutRes val layoutResId:
     fun errorDialog(msg: String? = null) {
         loadingDialog.dismiss()
         successDialog.dismiss()
-        if (!msg.isNullOrEmpty()){
+        if (!msg.isNullOrEmpty()) {
             errorDialog.updateDesc(msg)
         }
         errorDialog.show()
@@ -235,7 +246,7 @@ abstract class HiltBaseActivity<DB: ViewDataBinding>(@LayoutRes val layoutResId:
     fun successDialog(msg: String? = null) {
         loadingDialog.dismiss()
         errorDialog.dismiss()
-        if (!msg.isNullOrEmpty()){
+        if (!msg.isNullOrEmpty()) {
             successDialog.updateDesc(msg)
         }
         successDialog.show()
@@ -252,40 +263,69 @@ abstract class HiltBaseActivity<DB: ViewDataBinding>(@LayoutRes val layoutResId:
      * 显示View的动画
      */
     fun View.showAnim(duration: Long = 400L) {
-        if (visibility == View.VISIBLE){
+        if (visibility == View.VISIBLE) {
             return
         }
         visibility = View.VISIBLE
         alpha = 0f
-        animate().setDuration(duration).alpha(1f).start()
+        animate().setDuration(duration)
+            .setListener(null)
+            .alpha(1f).start()
+    }
+
+    /**
+     * 隐藏View的动画
+     */
+    fun View.hideAnim(duration: Long = 400L){
+        if (visibility == View.GONE){
+            return
+        }
+        alpha = 1f
+        animate().setDuration(duration)
+            .alpha(0f)
+            .setListener(object : Animator.AnimatorListener{
+                override fun onAnimationStart(animation: Animator) {
+                }
+
+                override fun onAnimationEnd(animation: Animator) {
+                    visibility = View.GONE
+                }
+
+                override fun onAnimationCancel(animation: Animator) {
+                }
+
+                override fun onAnimationRepeat(animation: Animator) {
+                }
+            })
+            .start()
     }
 
     /**
      * 隐藏View
      */
     fun View.hide() {
-        if (visibility != View.VISIBLE){
+        if (visibility != View.VISIBLE) {
             return
         }
         visibility = View.INVISIBLE
     }
 
     override fun onError(message: String?, isToast: Boolean, isDialog: Boolean, code: Int?) {
-        if (isDialog){
-            if (isToast){
+        if (isDialog) {
+            if (isToast) {
                 showContent()
                 // 弹出toast
                 message?.toast()
-            }else{
+            } else {
                 // 显示错误弹窗
                 errorDialog(message)
             }
-        }else{
-            if (isToast){
+        } else {
+            if (isToast) {
                 showContent()
                 // 弹出toast
                 message?.toast()
-            }else{
+            } else {
                 // 显示错误布局
                 showError(message)
             }
@@ -300,7 +340,7 @@ abstract class HiltBaseActivity<DB: ViewDataBinding>(@LayoutRes val layoutResId:
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom)
             // 设置标题栏顶部padding
-            _rootBinding.baseTitleLayout.root.setPadding(0,systemBars.top,0,0)
+            _rootBinding.baseTitleLayout.root.setPadding(0, systemBars.top, 0, 0)
             insets
         }
     }
@@ -311,9 +351,9 @@ abstract class HiltBaseActivity<DB: ViewDataBinding>(@LayoutRes val layoutResId:
      * @param isPortrait 是否锁定竖屏
      */
     fun lockOrientation(isPortrait: Boolean) {
-        requestedOrientation = if (isPortrait){
+        requestedOrientation = if (isPortrait) {
             ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        }else{
+        } else {
             ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
     }
@@ -364,14 +404,36 @@ abstract class HiltBaseActivity<DB: ViewDataBinding>(@LayoutRes val layoutResId:
     /**
      * 设置状态栏颜色
      */
-    fun statusBarColor(@ColorRes color: Int){
+    fun statusBarColor(@ColorRes color: Int) {
         window.statusBarColor = getColor(color)
+    }
+
+    /**
+     * 设置状态栏图标颜色
+     *
+     * @param isDark true：图标为黑色，false：图标为白色
+     */
+    fun statusIconDark(isDark: Boolean){
+        WindowCompat.getInsetsController(window, window.decorView).apply {
+            isAppearanceLightStatusBars = isDark
+        }
+    }
+
+    /**
+     * 设置导航栏图标颜色
+     *
+     * @param isDark true：图标为黑色，false：图标为白色
+     */
+    fun navigationIconDark(isDark: Boolean){
+        WindowCompat.getInsetsController(window, window.decorView).apply {
+            isAppearanceLightNavigationBars = isDark
+        }
     }
 
     /**
      * 设置导航栏颜色
      */
-    fun navigationBarColor(@ColorRes color: Int){
+    fun navigationBarColor(@ColorRes color: Int) {
         window.navigationBarColor = getColor(color)
     }
 

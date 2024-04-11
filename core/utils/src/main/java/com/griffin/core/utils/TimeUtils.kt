@@ -9,6 +9,7 @@ import java.util.Locale
 object TimeUtils {
 
     const val FORMAT_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss"
+    const val FORMAT_YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm"
     const val FORMAT_YYYY_MM_DD = "yyyy-MM-dd"
     const val FORMAT_HH_MM_SS = "HH:mm:ss"
     const val FORMAT_HH_MM = "HH:mm"
@@ -39,10 +40,22 @@ object TimeUtils {
      * @param pattern 输入时间格式
      * @param format 输出时间格式
      */
-    fun String.toFormatTime(pattern: String = FORMAT_YYYY_MM_DD_HH_MM_SS,format: String = FORMAT_YYYY_MM_DD_HH_MM_SS): String {
+    fun String.toFormatTime(
+        pattern: String = FORMAT_YYYY_MM_DD_HH_MM_SS,
+        format: String = FORMAT_YYYY_MM_DD_HH_MM_SS
+    ): String {
         // 先将String转换为Date，然后再将Date转换为String
         val defFormat = getDefFormat(pattern)
         return defFormat.parse(this)?.toFormatTime(format) ?: ""
+    }
+
+    /**
+     * 将String类型的时间转换为Date
+     *
+     * @param @param format 输出时间格式
+     */
+    fun String.strToDate(format: String = FORMAT_YYYY_MM_DD_HH_MM_SS): Date{
+        return getDefFormat(format).parse(this) ?: Date()
     }
 
     /**
@@ -53,6 +66,15 @@ object TimeUtils {
     fun Date.toFormatTime(format: String = FORMAT_YYYY_MM_DD_HH_MM_SS): String {
         val defFormat = getDefFormat(format)
         return defFormat.format(this)
+    }
+
+    /**
+     * 获取当前字符串日期
+     *
+     * @param format 输出时间格式
+     */
+    fun currentStr(format: String = FORMAT_YYYY_MM_DD_HH_MM_SS): String {
+        return Date().toFormatTime(format)
     }
 
     /**

@@ -18,9 +18,9 @@ data class BillDetailDto(
     @SerialName("createTime")
     val createTime: String = "",
     @SerialName("expenditure")
-    val expenditure: Int = 0,
+    val expenditure: Long = 0,
     @SerialName("income")
-    val income: Int = 0
+    val income: Long = 0
 )
 
 /**
@@ -46,7 +46,7 @@ data class BillListDto(
     @SerialName("address")
     val address: String = "",
     @SerialName("billAmount")
-    val billAmount: Int = 0,
+    val billAmount: Long = 0,
     @SerialName("billId")
     val billId: Long = 0,
     @SerialName("billName")
@@ -80,7 +80,7 @@ data class BillListDto(
 @Serializable
 data class UserAccountDto(
     @SerialName("balance")
-    val balance: Int = 0,
+    val balance: Long = 0,
     @SerialName("cardCode")
     val cardCode: String = "",
     @SerialName("cardName")

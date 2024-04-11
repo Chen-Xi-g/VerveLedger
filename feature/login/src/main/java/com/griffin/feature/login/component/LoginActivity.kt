@@ -15,6 +15,8 @@ import com.griffin.core.base.web.WebActivity
 import com.griffin.core.data.model.CaptchaImageModel
 import com.griffin.core.router.RoutePath
 import com.griffin.core.utils.gone
+import com.griffin.core.utils.isDarkTheme
+import com.griffin.core.utils.router
 import com.griffin.core.utils.start
 import com.griffin.core.utils.statusHeight
 import com.griffin.core.utils.toast
@@ -58,8 +60,7 @@ class LoginActivity : HiltBaseActivity<ActivityLoginBinding>(R.layout.activity_l
                 if (it is CaptchaImageModel) {
                     binding.ivCodeContent.setImageBitmap(it.bitmap)
                 } else if (it is Boolean && it) {
-                    TheRouter.build(RoutePath.Main.MAIN)
-                        .navigation()
+                    RoutePath.Main.MAIN.router()
                     finish()
                 }
             }

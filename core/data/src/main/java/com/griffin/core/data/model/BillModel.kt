@@ -19,8 +19,8 @@ import kotlinx.serialization.Serializable
 data class BillModel(
     val id: Long = 0L,
     val createTime: String = "",
-    val income: Int = 0,
-    val expenses: Int = 0,
+    val income: Long = 0,
+    val expenses: Long = 0,
     override var itemGroupPosition: Int = 0,
     override var itemExpand: Boolean = false,
     override var itemChildList: List<Any?>? = listOf<BillListModel>()

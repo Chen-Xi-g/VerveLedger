@@ -202,12 +202,17 @@ class MapActivity : HiltBaseActivity<ActivityMapBinding>(R.layout.activity_map) 
         binding.tvConfirm.setOnClickListener {
             // 确认选择
             val intent = Intent()
+            val address =
+                (binding.item?.district ?: "") + if (binding.item?.address.isNullOrBlank()) {
+                    ""
+                } else {
+                    " - " + (binding.item?.address ?: "")
+                } + " - " + (binding.item?.name ?: "")
             intent.putExtra(
                 "data", MapLocationModel(
-                    address = (binding.item?.district ?: "") + " - " + (binding.item?.address
-                        ?: "") + " - " + (binding.item?.name ?: ""),
+                    address = address,
                     longitude = binding.item?.point?.longitude ?: 0.0,
-                    latitude = binding.item?.point?.longitude ?: 0.0
+                    latitude = binding.item?.point?.latitude ?: 0.0
                 )
             )
             setResult(RESULT_OK, intent)

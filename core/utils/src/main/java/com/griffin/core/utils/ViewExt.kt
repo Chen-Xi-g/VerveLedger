@@ -1,5 +1,9 @@
 package com.griffin.core.utils
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.view.LayoutInflater
 import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -39,4 +43,25 @@ fun View.statusHeight(){
         this.layoutParams = layoutParams
         insets
     }
+}
+
+/**
+ * 布局转换为图片
+ */
+fun Context.layoutToBitmap(layoutResId: Int, initView: (View) -> Unit = {}): Bitmap {
+    val view = LayoutInflater.from(this).inflate(layoutResId, null, false)
+    initView(view)
+    val widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+    val heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+    view.measure(widthMeasureSpec, heightMeasureSpec)
+
+    view.layout(0, 0, view.measuredWidth, view.measuredHeight)
+
+    val bitmap = Bitmap.createBitmap(view.measuredWidth, view.measuredHeight, Bitmap.Config.ARGB_8888)
+
+    val canvas = Canvas(bitmap)
+
+    view.draw(canvas)
+
+    return bitmap
 }
