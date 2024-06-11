@@ -32,6 +32,7 @@ import com.griffin.core.router.RoutePath
 import com.griffin.core.rv.linear
 import com.griffin.core.rv.setData
 import com.griffin.core.rv.setup
+import com.griffin.core.utils.gone
 import com.griffin.core.utils.isDarkTheme
 import com.griffin.core.utils.isVisible
 import com.griffin.core.utils.layoutToBitmap
@@ -169,6 +170,8 @@ class MapDetailActivity : HiltBaseActivity<ActivityMapDetailBinding>(R.layout.ac
             }
 
             TYPE_DETAIL -> {
+                binding.rvList.gone()
+                binding.ivMenu.gone()
                 viewModel.loadDetail(id)
             }
         }
@@ -236,7 +239,9 @@ class MapDetailActivity : HiltBaseActivity<ActivityMapDetailBinding>(R.layout.ac
                 }
                 markers.add(marker)
             }
-            binding.rvList.setData(markers)
+            if (this@MapDetailActivity.type == TYPE_MAP) {
+                binding.rvList.setData(markers)
+            }
         }
     }
 

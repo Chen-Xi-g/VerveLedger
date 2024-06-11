@@ -143,7 +143,7 @@ class AddViewModel @Inject constructor(
                     address = uiState.value.address,
                     billAmount = amount.value.y2f(),
                     billName = uiState.value.billName,
-                    createTime = uiState.value.createTime,
+                    createTime = uiState.value.createTime + ":00",
                     latitude = uiState.value.latitude,
                     longitude = uiState.value.longitude,
                     remark = uiState.value.remark,

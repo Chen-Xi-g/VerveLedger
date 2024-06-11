@@ -98,12 +98,9 @@ object TimeUtils {
         } else {
             val wee: Long = getWeeOfToday()
             if (calendar.timeInMillis >= wee) {
-                String.format("今天%tR", calendar.timeInMillis)
+                "今天"
             } else {
-                if (calendar.timeInMillis >= wee - 86400000L) java.lang.String.format(
-                    "昨天%tR",
-                    calendar.timeInMillis
-                ) else String.format("%tF", calendar.timeInMillis)
+                if (calendar.timeInMillis >= wee - 86400000L) "昨天" else String.format("%tF", calendar.timeInMillis)
             }
         }
     }

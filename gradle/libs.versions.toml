@@ -28,7 +28,7 @@ splashScreen = "1.0.1"
 refresh = "2.1.0"
 map = "10.0.600"
 map-search = "9.7.0"
-domainUrlMainDebug = "http://192.168.0.108:6164"
+domainUrlMainDebug = "https://ht.ledger.api.minlukj.com"
 domainUrlMain = "https://ht.ledger.api.minlukj.com"
 
 [libraries]
